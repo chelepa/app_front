@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  app:
+    container_name: APP
+    build:
+      context: .
+    ports:
+      - "9021:3000"
+    networks:
+      chelepa:
+        ipv4_address: 172.19.0.11
+
+networks:
+  chelepa:
+    external: true
