@@ -9,7 +9,8 @@ export const Private = () => {
         <div>
             <h2>Pagina Privada</h2>
 
-            Ola {auth.user?.name}
+            Ola {auth.user?.fullName}
+            {auth.getRoles()}
         </div>
     );
 }

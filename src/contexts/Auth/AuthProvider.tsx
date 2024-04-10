@@ -1,21 +1,19 @@
-import { useApi } from "../../hooks/useApi";
-import { User } from "../../types/User";
-import { AuthContext } from "./AuthContext";
+import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
+import { useApi } from "../../hooks/useApi";
+import { ITokenClaims } from "../../types/ITokenClaims";
+import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<ITokenClaims | null>(null);
     const api = useApi();
 
     useEffect(() => {
         const validateToken = async () => {
-            const storageData = localStorage.getItem('authToken');
+            const storageData = getClaims();
             if (storageData) {
-                const data = await api.validateToken(storageData);
-                if (data.user) {
-                    setUser(data.user);
-                }
+              setUser(storageData)
             }
         }
         validateToken();
@@ -24,10 +22,12 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
     const signin = async (email: string, password: string) => {
         const data = await api.signin(email, password);
-
-        if(data.user && data.token){
-            setUser(data.user);
+        if(data.auth){
             setToken(data.token);
+            const claims = getClaims();
+            if(claims){
+                setUser(claims)
+            }
             return true;
         }
         return false;
@@ -36,16 +36,53 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const signout = async () => {
         // await api.logout();
         setUser(null);
-        setToken('')
+        removeToken();
     }
 
-    const setToken = (token: string) => {
-        localStorage.setItem('authToken', token);
-    }
+    const getRoles = () => {
+      const claims = getClaims();
+      if (claims) {
+        return claims.Roles.split(",");
+      }
+      return [];
+    };
 
     return (
-        <AuthContext.Provider value={{user, signin, signout}}>
+        <AuthContext.Provider value={{user, signin, signout, getRoles}}>
             {children}
         </AuthContext.Provider>
     );
+}
+
+function getClaims(): ITokenClaims | undefined {
+    const token = getToken();
+    if (token) {
+        var claims: ITokenClaims = jwtDecode(token);
+        if (claims && isTokenValid(claims)) {
+            return claims;
+        } else {
+            removeToken();
+        }
+    }
+    return;
+}
+
+function isTokenValid(claims: ITokenClaims): boolean {
+  return claims.exp * 1000 > Date.now();
+}
+
+function getToken(): string | undefined {
+  const token = window.localStorage.getItem("authToken");
+  if (token) {
+    return token;
+  }
+  return;
+}
+
+function setToken(token: string) {
+  window.localStorage.setItem("authToken", token);
+}
+
+function removeToken() {
+  window.localStorage.removeItem("authToken");
 }
