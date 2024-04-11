@@ -2,6 +2,8 @@ import { ChangeEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import styles from './Login.module.css'
+import { Input } from "../form/Input";
+import { SubmitButton } from '../form/SubmitButton';
 
 export const Login = () => {
   const auth = useContext(AuthContext);
@@ -35,31 +37,31 @@ export const Login = () => {
         <div className={styles.AuthFormContent}>
           <h3 className={styles.AuthFormTitle}>Sign In</h3>
           <div className="form-group mt-3">
-            <label>E-mail</label>
-            <input
-               type="text"
-               className="form-control"
-               id="email"
-               placeholder="email@gmail.com"
-               value={email}
-               onChange={handleEmailInput}
-             />
+            <Input
+              type="text"
+              text="E-mail"
+              name="name"
+              placeholder="Digite seu email"
+              handleOnChange={handleEmailInput}
+              value={email}
+            />
           </div>
           <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Digite sua senha"
-                  value={password}
-                  onChange={handlePasswordInput}
-                />
+            <Input
+              type="password"
+              text="Password"
+              name="name"
+              placeholder="Digite sua senha"
+              handleOnChange={handlePasswordInput}
+              value={password}
+            />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button className="btn btn-primary" onClick={handleLogin}>Submit</button>
+            <SubmitButton text="Submit" handleOnChange={handleLogin} />
           </div>
-          <p className="forgot-password text-right mt-2">Esqueceu sua <a href="#"> Senha?</a></p>
+          <p className="forgot-password text-right mt-2">
+            Esqueceu sua <a href="#"> Senha?</a>
+          </p>
         </div>
       </div>
     </div>

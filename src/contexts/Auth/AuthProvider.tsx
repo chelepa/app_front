@@ -10,71 +10,80 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const api = authApi();
 
     useEffect(() => {
-        const validateToken = async () => {
-            const storageData = getClaims();
-            if (storageData) {
-              setUser(storageData)
-            }
+      const validateToken = async () => {
+        const storageData = getClaims();
+        if (storageData) {
+          setUser(storageData);
+        } else{
+          setUser(null);
         }
-        validateToken();
+      };
+      validateToken();
     }, []);
 
-
     const signin = async (email: string, password: string) => {
-        const data = await api.signin(email, password);
-        if(data.auth){
-            setToken(data.token);
-            const claims = getClaims();
-            if(claims){
-                setUser(claims)
-            }
-            return true;
+      const data = await api.signin(email, password);
+      if (data.auth) {
+        setToken(data.token);
+        const claims = getClaims();
+        if (claims) {
+          setUser(claims);
         }
-        return false;
-    }
+        return true;
+      }
+      return false;
+    };
 
     const signout = async () => {
-        setUser(null);
-        removeToken();
-    }
+      setUser(null);
+      removeToken();
+    };
 
-    const getRoles = () => {
-      const claims = getClaims();
-      if (claims) {
-        return claims.Roles.split(",");
+    const verifyIfTokenIsExpired = () => {
+      const token = getToken();
+      if (token) {
+        var claims: ITokenClaims = jwtDecode(token);
+        return isTokenValid(claims) ? false : true;
+      } else {
+        return true;
       }
-      return [];
     };
 
     const hasPermission = (roles: string[]) => {
       const authorizations = getRoles();
       if (authorizations) {
-        console.log(authorizations);
-        console.log(roles.some(role => authorizations.includes(role)));
-        return roles.some(role => authorizations.includes(role));
+        return roles.some((role) => authorizations.includes(role));
       }
       return false;
-    }
+    };
 
     return (
-        <AuthContext.Provider value={{user, signin, signout, getRoles, hasPermission}}>
+        <AuthContext.Provider value={{user, signin, signout, hasPermission, verifyIfTokenIsExpired}}>
             {children}
         </AuthContext.Provider>
     );
 }
 
 function getClaims(): ITokenClaims | undefined {
-    const token = getToken();
-    if (token) {
-        var claims: ITokenClaims = jwtDecode(token);
-        if (claims && isTokenValid(claims)) {
-            return claims;
-        } else {
-            removeToken();
-        }
+  const token = getToken();
+  if (token) {
+    var claims: ITokenClaims = jwtDecode(token);
+    if (claims && isTokenValid(claims)) {
+      return claims;
+    } else {
+      removeToken();
     }
-    return;
+  }
+  return;
 }
+
+function getRoles(): string[] {
+  const claims = getClaims();
+  if (claims) {
+    return claims.Roles.split(",");
+  }
+  return [];
+};
 
 function isTokenValid(claims: ITokenClaims): boolean {
   return claims.exp * 1000 > Date.now();

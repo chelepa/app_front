@@ -21,9 +21,11 @@ export const Header = ({ handleLogout }: { handleLogout: any }) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <NavbarLink to="/" hidden={false} value="Home"/>
-              <NavbarLink to="/permission" hidden={!auth.hasPermission(["ADM"])} value="Permissao"/>
-              <NavbarLink to="/usuarios" hidden={!auth.hasPermission(["ADM"])} value="Usuarios"/>
+              <NavbarLink to="/" value="Home"/>
+              {auth.hasPermission(["ADM"]) && <NavbarLink to="/usuarios" value="Usuarios"/>}
+              {auth.hasPermission(["ADM"]) && <NavbarLink to="/group" value="Grupo de Permissão"/>}
+              {auth.hasPermission(["ADM"]) && <NavbarLink to="/permission" value="Permissao"/>}
+              
               {/* <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

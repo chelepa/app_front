@@ -5,6 +5,8 @@ import { Container } from './components/layout/Container';
 import { Footer } from './components/layout/Footer';
 import { Header } from './components/layout/Header';
 import { Home } from './components/pages/Home';
+import { Permission } from './components/pages/Permission';
+import { PermissionProvider } from './contexts/Permission/PermissionProvider';
 
 function App() {
   const auth = useContext(AuthContext);
@@ -20,6 +22,7 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/permission" element={<PermissionProvider><Permission/></PermissionProvider>} />
         </Routes>
       </Container>
       <Footer/>
