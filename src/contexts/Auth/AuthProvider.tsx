@@ -1,13 +1,13 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
-import { useApi } from "../../hooks/useApi";
+import { authApi } from "../../api/AuthApi"
 import { ITokenClaims } from "../../types/ITokenClaims";
 import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
     const [user, setUser] = useState<ITokenClaims | null>(null);
-    const api = useApi();
+    const api = authApi();
 
     useEffect(() => {
         const validateToken = async () => {
@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     }
 
     const signout = async () => {
-        // await api.logout();
         setUser(null);
         removeToken();
     }
@@ -47,8 +46,18 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       return [];
     };
 
+    const hasPermission = (roles: string[]) => {
+      const authorizations = getRoles();
+      if (authorizations) {
+        console.log(authorizations);
+        console.log(roles.some(role => authorizations.includes(role)));
+        return roles.some(role => authorizations.includes(role));
+      }
+      return false;
+    }
+
     return (
-        <AuthContext.Provider value={{user, signin, signout, getRoles}}>
+        <AuthContext.Provider value={{user, signin, signout, getRoles, hasPermission}}>
             {children}
         </AuthContext.Provider>
     );

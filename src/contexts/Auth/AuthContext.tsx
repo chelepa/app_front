@@ -1,5 +1,4 @@
 import {createContext} from 'react' 
-import { User } from '../../types/User';
 import { ITokenClaims } from '../../types/ITokenClaims';
 
 export type AuthContextType = {
@@ -7,6 +6,7 @@ export type AuthContextType = {
     signin: (email: string, password: string) => Promise<boolean>;
     signout: () => void;
     getRoles: () => string[];
+    hasPermission: (roles: string[]) => boolean;
 
 }
 

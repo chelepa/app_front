@@ -1,6 +1,7 @@
 import { ChangeEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
+import styles from './Login.module.css'
 
 export const Login = () => {
   const auth = useContext(AuthContext);
@@ -29,12 +30,12 @@ export const Login = () => {
   };
 
   return (
-    <div className="Auth-form-container">
-      <div className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
+    <div className={styles.AuthFormContainer}>
+      <div className={styles.AuthForm}>
+        <div className={styles.AuthFormContent}>
+          <h3 className={styles.AuthFormTitle}>Sign In</h3>
           <div className="form-group mt-3">
-            <label>Email address</label>
+            <label>E-mail</label>
             <input
                type="text"
                className="form-control"
