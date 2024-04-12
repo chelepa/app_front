@@ -1,5 +1,14 @@
-.container{
-    background: linear-gradient(to bottom, #dddddd, #999999);
-    width: 100vw;
-    height: 91vh;
-  }
+.container {
+  width: 100vw;
+  height: 86vh;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.start {
+  justify-content: flex-start;
+  height: 100% !important;
+  width: 100%;
+}
