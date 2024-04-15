@@ -9,10 +9,16 @@
     font-weight: bold;
 }
 
-.form_control input {
+.form_control_input_one {
     padding: 0.7em;
     border-radius: 0;
     border: none;
+}
+
+.form_control_input_two {
+    padding: 0.3em !important;
+    border-radius: 9px !important;
+    border: #000 1px solid !important;
 }
 
 .form_control input::placeholder {

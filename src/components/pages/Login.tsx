@@ -44,6 +44,8 @@ export const Login = () => {
               placeholder="Digite seu email"
               handleOnChange={handleEmailInput}
               value={email}
+              customClass=""
+              readOnly={false}
             />
           </div>
           <div className="form-group mt-3">
@@ -54,6 +56,8 @@ export const Login = () => {
               placeholder="Digite sua senha"
               handleOnChange={handlePasswordInput}
               value={password}
+              customClass=""
+              readOnly={false}
             />
           </div>
           <div className="d-grid gap-2 mt-3">

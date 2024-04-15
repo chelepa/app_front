@@ -5,12 +5,15 @@ import { PermissionContext } from "../../contexts/Permission/PermissionContext";
 // import { useLocation } from "react-router-dom";
 import { Container } from "../layout/Container";
 import { Panel } from "../layout/Panel";
-import { TPermissionList } from "../../types/PermissionResponse";
-import { ModalUpdate } from "../layout/ModalUpdate";
+import { PermissionResponse, TPermissionList } from "../../types/PermissionResponse";
+import { ModalUpdatePermission } from "../layout/Modal/ModalUpdatePermission";
 
 export const Permission = () => {
+  const initPermission = {id: 0, permission: "", description: ""}
   const auth = useContext(PermissionContext);
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShowUpdate, setModalShowUpdate] = useState(false);
+  const [modalShowCreate, setModalShowCreate] = useState(false);
+  const [permission, setPermission] = useState<PermissionResponse>(initPermission);
 
   // const location = useLocation();
   // let msg = "";
@@ -18,13 +21,19 @@ export const Permission = () => {
   //   msg = location.state.message;
   // }
 
-  const handleOpenModalEdit = (event: TPermissionList) => {
-    console.log(event);
-    setModalShow(true);
+  const handleOpenModalEdit = (event: PermissionResponse) => {
+    setPermission(event);
+    setModalShowUpdate(true);
   };
 
-  const handleCloseModalEdit = () => {
-    setModalShow(false);
+  const handleOpenModalCreate = () => {
+    setPermission(initPermission);
+    setModalShowCreate(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalShowUpdate(false);
+    setModalShowCreate(false);
   };
 
   const handleSearch = (teste: any) => {
@@ -37,16 +46,16 @@ export const Permission = () => {
         <div>
           <Panel
             moduleTitle="Permissões"
-            txt_linkButton="Nova Permissão"
-            to_linkButton="/"
             handleOnChange_search={handleSearch}
             tr_table={["#", "Descricão", "Permissão"]}
             objectIndx={["id", "permission", "description"]}
             objectList={auth.permissionList}
             handleOnChange_edit={handleOpenModalEdit}
+            handleOnChange_create={handleOpenModalCreate}
           />
           {/* <Message type={'error'} msg="asjhdlkajshdlkasjhdlkajshdlkajshd"/> */}
-          <ModalUpdate show={modalShow} enable={handleCloseModalEdit}/>
+          <ModalUpdatePermission show={modalShowUpdate} enable={handleCloseModal} permission={permission} title="Edição de Permissão"/>
+          <ModalUpdatePermission show={modalShowCreate} enable={handleCloseModal} permission={permission} title="Criacão da Permissão"/>
         </div>
       </Container>
     </div>
