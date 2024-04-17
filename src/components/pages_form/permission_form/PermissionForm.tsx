@@ -1,9 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { Input } from "../../form/Input";
 import { SubmitButton } from "../../form/SubmitButton";
-import { Message } from "../../layout/Message";
 import { PermissionRequest } from "../../../types/PermissionRequest";
-// import styles from "./PermissionForm.module.css";
 
 export const PermissionForm = ({ textbutton, handleSubmit}: { textbutton: string, handleSubmit: any }) => {
   const [description, setDescription] = useState("");

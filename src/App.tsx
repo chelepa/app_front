@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Header handleLogout={handleLogout}/>
-      <Container customClass=''>
+      <Container customClass='' msg="" type="">
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/permission" element={<PermissionProvider><Permission/></PermissionProvider>} />

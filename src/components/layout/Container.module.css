@@ -1,14 +1,17 @@
 .container {
-  width: 100vw;
-  height: 86vh;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   flex-wrap: wrap;
 }
 
-.start {
-  height: 100% !important;
-  width: 100%;
-  display: contents;
+.container_Panel{
+  width: -webkit-fill-available;
+  padding-top: 1em;
+
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  height: 77vh;
 }

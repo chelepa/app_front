@@ -5,6 +5,7 @@ import { HiRefresh } from 'react-icons/hi';
 import { GrEdit } from 'react-icons/gr';
 import { LinkIcon } from '../form/LinkIcon';
 import { Loading } from './Loading';
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 export const Panel = ({
     objectList,
@@ -14,10 +15,12 @@ export const Panel = ({
     objectIndx,
     handleOnChangeEdit,
     handleOnChangeCreate,
-    loading
+    loading,
+    handleRefresh
   }: {
     loading: boolean;
     handleOnChangeEdit: any;
+    handleRefresh: any;
     handleOnChangeCreate: any;
     objectIndx: string[];
     tr_table: string[];
@@ -52,38 +55,43 @@ export const Panel = ({
             <LinkIcon to={handleOnChangeCreate} icon={<IoIosAddCircleOutline size={30} />} customClass={''}/>
             </div>
             <div className={styles.itens}>
-              <HiRefresh size={30}/>
+              <HiRefresh size={30} onClick={handleRefresh}/>
             </div>
           </div>
         </div>
         {!loading && <Loading/>}
-        <table className="table">
-          <thead>
-            <tr>
-              {tr_table.map((item) => (
-                <th>{item}</th>
-              ))}
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {objectList.length > 0 &&
-              objectList.map((project) => (
-                <tr>
-                  {objectIndx.map((indx) => (
-                    <td> {project[indx]}</td>
-                  ))}
-                  <td>
-                    <div className={styles.editAndDelete}>
-                      <div>
-                        <LinkIcon to={`${handleOnChangeEdit}${project.id}`} icon={<GrEdit size={20}/>} customClass={''}/>
+        <div className={styles.table_overflow}>
+          <table className="table">
+            <thead>
+              <tr>
+                {tr_table.map((item) => (
+                  <th>{item}</th>
+                ))}
+                <th></th>
+              </tr>
+            </thead>
+            <tbody >
+              {objectList.length > 0 &&
+                objectList.map((project) => (
+                  <tr>
+                    {objectIndx.map((indx) => (
+                      <td> {project[indx]}</td>
+                    ))}
+                    <td>
+                      <div className={styles.editAndDelete}>
+                        <div>
+                          <LinkIcon to={`${handleOnChangeEdit}${project.id}`} icon={<GrEdit size={20}/>} customClass={''}/>
+                        </div>
+                        <div>
+                          <MdOutlineDeleteOutline size={20}/>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
