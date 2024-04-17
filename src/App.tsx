@@ -4,16 +4,16 @@ import { AuthContext } from './contexts/Auth/AuthContext';
 import { Container } from './components/layout/Container';
 import { Footer } from './components/layout/Footer';
 import { Header } from './components/layout/Header';
-import { Home } from './components/pages/Home';
-import { Permission } from './components/pages/Permission';
+import { Home } from './components/pages/Home/Home';
+import { Permission } from './components/pages/Permission/Permission';
 import { PermissionProvider } from './contexts/Permission/PermissionProvider';
+import { PermissionCreate } from './components/pages/Permission/PermissionCreate';
 
 function App() {
   const auth = useContext(AuthContext);
 
   const handleLogout = async () => {
     await auth.signout();
-    window.location.href = window.location.href;
   }
 
   return (
@@ -23,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/permission" element={<PermissionProvider><Permission/></PermissionProvider>} />
+          <Route path="/permission/create" element={<PermissionProvider><PermissionCreate/></PermissionProvider>} />
         </Routes>
       </Container>
       <Footer/>

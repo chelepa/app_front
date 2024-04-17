@@ -24,7 +24,7 @@ export const Header = ({ handleLogout }: { handleLogout: any }) => {
               <NavbarLink to="/" value="Home"/>
               {auth.hasPermission(["ADM"]) && <NavbarLink to="/usuarios" value="Usuarios"/>}
               {auth.hasPermission(["ADM"]) && <NavbarLink to="/group" value="Grupo de Permissão"/>}
-              {auth.hasPermission(["ADM"]) && <NavbarLink to="/permission" value="Permissao"/>}
+              {auth.hasPermission(["ADM"]) && <NavbarLink to="/permission" value="Permissão"/>}
               
               {/* <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

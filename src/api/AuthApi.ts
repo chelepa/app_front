@@ -20,11 +20,9 @@ export const authApi = () => ({
     getAllPermission: async () => {
         const response = await api.get('/v1/permission')
             .then((res) => {
-                // console.log(res.data)
                 return res.data;
             }).catch((error) => {
-                // console.error(error)
-                return null;
+                return error;
             })
         return response;
     }

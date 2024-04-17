@@ -1,5 +1,6 @@
 .AuthFormContainer {
-    background: linear-gradient(to bottom, #dddddd, #999999);
+    /* background: linear-gradient(to bottom, #dddddd, #999999); */
+    background-color: #efefef;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,9 +1,9 @@
 import { ChangeEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import styles from './Login.module.css'
-import { Input } from "../form/Input";
-import { SubmitButton } from '../form/SubmitButton';
+import { Input } from "../../form/Input";
+import { SubmitButton } from '../../form/SubmitButton';
 
 export const Login = () => {
   const auth = useContext(AuthContext);
@@ -46,6 +46,7 @@ export const Login = () => {
               value={email}
               customClass=""
               readOnly={false}
+              erros=""
             />
           </div>
           <div className="form-group mt-3">
@@ -58,10 +59,11 @@ export const Login = () => {
               value={password}
               customClass=""
               readOnly={false}
+              erros=""
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <SubmitButton text="Submit" handleOnChange={handleLogin} />
+            <SubmitButton text="Submit" handleOnChange={handleLogin} customClass=""/>
           </div>
           <p className="forgot-password text-right mt-2">
             Esqueceu sua <a href="#"> Senha?</a>

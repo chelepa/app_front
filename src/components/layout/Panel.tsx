@@ -1,12 +1,10 @@
 import { IoIosAddCircleOutline } from 'react-icons/io';
-import { LinkButton } from '../form/LinkButton';
 import { SearchInput } from '../form/SearchInput';
 import styles from './Panel.module.css'
 import { HiRefresh } from 'react-icons/hi';
 import { GrEdit } from 'react-icons/gr';
-import { MdDelete } from 'react-icons/md';
-import { SubmitButton } from '../form/SubmitButton';
-import { GrAddCircle } from "react-icons/gr";
+import { LinkIcon } from '../form/LinkIcon';
+import { Loading } from './Loading';
 
 export const Panel = ({
     objectList,
@@ -14,11 +12,13 @@ export const Panel = ({
     handleOnChange_search,
     tr_table,
     objectIndx,
-    handleOnChange_edit,
-    handleOnChange_create,
+    handleOnChangeEdit,
+    handleOnChangeCreate,
+    loading
   }: {
-    handleOnChange_edit: any;
-    handleOnChange_create: any;
+    loading: boolean;
+    handleOnChangeEdit: any;
+    handleOnChangeCreate: any;
     objectIndx: string[];
     tr_table: string[];
     objectList: any[];
@@ -31,7 +31,7 @@ export const Panel = ({
         <div className={styles.title_container}>
           <h2>{moduleTitle}</h2>
           <div className={styles.itens}>
-            <GrAddCircle size={40} onClick={handleOnChange_create} />
+            <LinkIcon to={handleOnChangeCreate} icon={<IoIosAddCircleOutline size={40} />} customClass={'btn_color_white'}/>
           </div>
         </div>
       </div>
@@ -49,13 +49,14 @@ export const Panel = ({
           </div>
           <div className={styles.refreshAndAdd}>
             <div className={styles.itens}>
-              <IoIosAddCircleOutline size={30} onClick={handleOnChange_create}/>
+            <LinkIcon to={handleOnChangeCreate} icon={<IoIosAddCircleOutline size={30} />} customClass={''}/>
             </div>
             <div className={styles.itens}>
-              <HiRefresh size={30} onClick={handleOnChange_create}/>
+              <HiRefresh size={30}/>
             </div>
           </div>
         </div>
+        {!loading && <Loading/>}
         <table className="table">
           <thead>
             <tr>
@@ -75,14 +76,7 @@ export const Panel = ({
                   <td>
                     <div className={styles.editAndDelete}>
                       <div>
-                        <GrEdit size={20}
-                          onClick={() => {
-                            handleOnChange_edit(project);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <MdDelete size={20}/>
+                        <LinkIcon to={`${handleOnChangeEdit}${project.id}`} icon={<GrEdit size={20}/>} customClass={''}/>
                       </div>
                     </div>
                   </td>

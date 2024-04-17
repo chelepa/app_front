@@ -12,3 +12,7 @@
 .btn::hover{
     color: #ffbb33;
 }
+
+.btn_save_update{
+    width: fit-content;
+}
