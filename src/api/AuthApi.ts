@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { PermissionRequest } from '../types/PermissionRequest';
+import { Permission } from '../components/pages/Permission/Permission';
 
 const api_authentication = axios.create({
     baseURL: process.env.REACT_APP_API
@@ -18,8 +19,15 @@ export const authApi = () => ({
         return response.data;
     },
 
-    getAllPermission: async () => {
-        const response = await api.get('/v1/permission')
+    getAllPermission: async (page: number, size: number, permission: string, description: string) => {
+        const response = await api.get('/v1/permission', {
+            params: {
+                page: page,
+                size: size,
+                permission: permission,
+                description: description
+            }
+        })
             .then((res) => {
                 return res.data;
             }).catch((error) => {

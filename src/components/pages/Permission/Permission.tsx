@@ -1,18 +1,17 @@
-import {useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { PermissionContext } from "../../../contexts/Permission/PermissionContext";
 import { Container } from "../../layout/Container";
 import { Panel } from "../../layout/Panel";
-import { TPermissionList } from "../../../types/PermissionResponse";
-import { useLocation } from "react-router-dom";
-import styles from "./Permission.module.css";
 
 
 export const Permission = () => {
   let msg = "";
+  let statePermission = {data: [], itemPerPage: 10, totalPages: 0, currentPage: 0, permission: "", description: "", totalItens: 0, initIten: 0, lastIten: 0};
   const auth = useContext(PermissionContext);
   const location = useLocation();
-  const [permissionList, setPermissionList] = useState<TPermissionList>([]);
   const [removeLoading, setRemoveLoading] = useState(false);
+  const [permissionState, setStatePermission] = useState(statePermission);
 
   if (location.state) {
     msg = location.state.message;
@@ -20,17 +19,8 @@ export const Permission = () => {
 
   useEffect(() => {
     location.state = "";
-
     setTimeout(() => {
-      auth.getAllPermission()
-        .then((res) => {
-          console.log(res);
-          setPermissionList(res.permission);
-          setRemoveLoading(true);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      functionGetPermission(permissionState.currentPage, permissionState.itemPerPage, permissionState.permission, permissionState.description);
     }, 3000);
   }, []);
 
@@ -38,34 +28,69 @@ export const Permission = () => {
 
   };
 
+  const handleSetItemPerPage = (event: ChangeEvent<HTMLInputElement>) => {
+    let itemPerPage = Number(event.target.value);
+    setRemoveLoading(false);
+    functionGetPermission(0, itemPerPage, permissionState.permission, permissionState.description);
+  };
+
+  const handlePagination = (event: any) => {
+    setRemoveLoading(false);
+    functionGetPermission(event.id, permissionState.itemPerPage, permissionState.permission, permissionState.description);
+  };
+
   const handleRefresh = () => {
-    setPermissionList([]);
+    // setStatePermission((prev) => ({
+    //   ...prev,
+    //   data: [],
+    //   itemPerPage: permissionState.itemPerPage,
+    //   currentPage: permissionState.currentPage,
+    //   totalPages: permissionState.totalPages,
+    //   totalItens: permissionState.totalItens,
+    //   initIten: 0,
+    //   lastIten: 0
+    // }));    
     setRemoveLoading(false);
     setTimeout(() => {
-      auth.getAllPermission()
-        .then((res) => {
-          setPermissionList(res.permission);
-          setRemoveLoading(true);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      functionGetPermission(permissionState.currentPage, permissionState.itemPerPage, permissionState.permission, permissionState.description);
     }, 3000);
   }
 
   return (
-    <Container customClass="start" msg={msg} type="success">
+    <Container customClass="start" msg="chelepa" type="success">
       <Panel
-        moduleTitle="Permissões"
-        handleOnChange_search={handleSearch}
-        handleRefresh={handleRefresh}
-        tr_table={["#", "Permissão", "Descricão"]}
-        objectIndx={["id", "permission", "description"]}
-        objectList={permissionList}
-        handleOnChangeEdit={"/permission/"}
-        handleOnChangeCreate={"/permission/create"}
-        loading={removeLoading}
+        state = {permissionState}
+        loading = {removeLoading}
+        handleOnChange_pagination = {handlePagination}
+        handleOnChange_search = {handleSearch}
+        handleOnChange_refresh = {handleRefresh}
+        handleOnChange_itemPerPage = {handleSetItemPerPage}
+        navigate_edit = {"/permission/"}
+        navigate_create = {"/permission/create"}
+        module_title = "Permissões"
+        header_table = {["#", "Permissão", "Descricão"]}
+        table_index = {["id", "permission", "description"]}
       />
     </Container>
   );
-};
+
+  function functionGetPermission(page: number, size: number, permission: string, description: string) {
+    auth.getAllPermission(page, size, permission, description)
+      .then((res) => {
+        setStatePermission((prev) => ({
+          ...prev,
+          data: res.permission,
+          itemPerPage: size,
+          currentPage: res.page,
+          totalPages: res.totalPages,
+          totalItens: res.totalItem,
+          initIten: res.permission[0].id,
+          lastIten: res.permission.length === size ? res.permission[size - 1].id : res.permission[res.permission.length - 1].id
+        }));      
+        setRemoveLoading(true);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+}

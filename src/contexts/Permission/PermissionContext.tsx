@@ -4,7 +4,7 @@ import { PermissionRequest } from "../../types/PermissionRequest";
 
 export type PermissionContext = {
     createPermission: (request: PermissionRequest) => Promise<PermissionResponse>;
-    getAllPermission: () => Promise<PermissionResponse>;
+    getAllPermission: (page: number, size: number, permission: string, description: string) => Promise<PermissionResponse>;
     
 };
 

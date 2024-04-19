@@ -9,8 +9,8 @@ export const PermissionProvider = ({ children }: { children: JSX.Element }) => {
     return await api.createPermission(request);
   };
 
-  const getAllPermission = async () => {
-    return await api.getAllPermission();
+  const getAllPermission = async (page: number, size: number, permission: string, description: string) => {
+    return await api.getAllPermission(page, size, permission, description);
   };
 
   return (
