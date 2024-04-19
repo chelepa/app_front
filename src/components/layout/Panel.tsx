@@ -9,10 +9,13 @@ import { Loading } from "./Loading";
 import styles from "./Panel.module.css";
 import { SelectItemPerPage } from "../form/SelectItemPerPage";
 import { GrConfigure } from "react-icons/gr";
+import { useState } from "react";
+import { Input } from "../form/Input";
 
 export const Panel = ({
   state,
   loading,
+  search_value,
   handleOnChange_pagination,
   handleOnChange_search,
   handleOnChange_refresh,
@@ -25,6 +28,7 @@ export const Panel = ({
 }: {
   state: any;
   loading: boolean;
+  search_value: string;
   handleOnChange_pagination: any;
   handleOnChange_search: any;
   handleOnChange_refresh: any;
@@ -35,6 +39,8 @@ export const Panel = ({
   header_table: string[];
   table_index: string[];
 }) => {
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <div className="card bg-dark text-white">
       <div className="card-body">
@@ -62,14 +68,26 @@ export const Panel = ({
           </div>
           <div className={styles.refreshAndAdd}>
             <div>
+              {/* <Input erros={undefined} type={""} text={""} name={""} placeholder={""} handleOnChange={undefined} value={searchValue} customClass={""} readOnly={false} /> */}
               <SearchInput
                 type="text"
                 text="Search"
                 name="myInput"
                 placeholder="Search"
                 handleOnChange={handleOnChange_search}
-                value="Search"
+                value={search_value}
               />
+                    {/* <Input
+        type="text"
+        text="Descricão"
+        name="description"
+        placeholder="Digite a Descricão"
+        handleOnChange={handleOnChange_search}
+        value={search_value}
+        customClass=""
+        readOnly={false}
+        erros=""
+      />  */}
             </div>
             <div className={styles.itens}>
               <LinkIcon

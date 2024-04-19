@@ -12,6 +12,8 @@ export const Permission = () => {
   const location = useLocation();
   const [removeLoading, setRemoveLoading] = useState(false);
   const [permissionState, setStatePermission] = useState(statePermission);
+  const [searchPermissionValue, setSearchPermissionValue] = useState("");
+  const [searchDescriptionValue, setSearchDescriptionValue] = useState("");
 
   if (location.state) {
     msg = location.state.message;
@@ -25,7 +27,9 @@ export const Permission = () => {
   }, []);
 
   const handleSearch = (teste: any) => {
-
+    setSearchPermissionValue(teste.target.value);
+    functionGetPermission(permissionState.currentPage, permissionState.itemPerPage, searchPermissionValue, searchDescriptionValue);
+    console.log(teste.target.value)
   };
 
   const handleSetItemPerPage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,16 +44,16 @@ export const Permission = () => {
   };
 
   const handleRefresh = () => {
-    // setStatePermission((prev) => ({
-    //   ...prev,
-    //   data: [],
-    //   itemPerPage: permissionState.itemPerPage,
-    //   currentPage: permissionState.currentPage,
-    //   totalPages: permissionState.totalPages,
-    //   totalItens: permissionState.totalItens,
-    //   initIten: 0,
-    //   lastIten: 0
-    // }));    
+    setStatePermission((prev) => ({
+      ...prev,
+      data: [],
+      itemPerPage: permissionState.itemPerPage,
+      currentPage: permissionState.currentPage,
+      totalPages: permissionState.totalPages,
+      totalItens: permissionState.totalItens,
+      initIten: 0,
+      lastIten: 0
+    }));    
     setRemoveLoading(false);
     setTimeout(() => {
       functionGetPermission(permissionState.currentPage, permissionState.itemPerPage, permissionState.permission, permissionState.description);
@@ -61,6 +65,7 @@ export const Permission = () => {
       <Panel
         state = {permissionState}
         loading = {removeLoading}
+        search_value = {searchPermissionValue}
         handleOnChange_pagination = {handlePagination}
         handleOnChange_search = {handleSearch}
         handleOnChange_refresh = {handleRefresh}
@@ -84,8 +89,8 @@ export const Permission = () => {
           currentPage: res.page,
           totalPages: res.totalPages,
           totalItens: res.totalItem,
-          initIten: res.permission[0].id,
-          lastIten: res.permission.length === size ? res.permission[size - 1].id : res.permission[res.permission.length - 1].id
+          initIten: res.permission.length > 0 ? res.permission[0].id : 0,
+          lastIten: res.permission.length > 0 ? res.permission.length === size ? res.permission[size - 1].id : res.permission[res.permission.length - 1].id : 0
         }));      
         setRemoveLoading(true);
       })
