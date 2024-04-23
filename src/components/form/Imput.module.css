@@ -24,3 +24,9 @@
 .form_control input::placeholder {
     color: #7b7b7b;
 }
+
+.form_control_input_delete {
+    border: 3px solid #000;
+    border-radius: 11px;
+    padding: 0.7em;
+}

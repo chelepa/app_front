@@ -13,8 +13,12 @@ export const PermissionProvider = ({ children }: { children: JSX.Element }) => {
     return await api.getAllPermission(page, size, permission, description);
   };
 
+  const deletePermissionById = async (id: string) => {
+    return await api.deletePermission(id);
+  };
+
   return (
-    <PermissionContext.Provider value={{createPermission, getAllPermission}}>
+    <PermissionContext.Provider value={{createPermission, getAllPermission, deletePermissionById}}>
       {children}
     </PermissionContext.Provider>
   );

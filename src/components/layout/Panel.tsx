@@ -1,25 +1,24 @@
 import { Pagination } from "react-bootstrap";
-import { GrEdit } from "react-icons/gr";
+import { GrConfigure, GrEdit } from "react-icons/gr";
 import { HiRefresh } from "react-icons/hi";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { LinkIcon } from "../form/LinkIcon";
 import { SearchInput } from "../form/SearchInput";
+import { SelectItemPerPage } from "../form/SelectItemPerPage";
 import { Loading } from "./Loading";
 import styles from "./Panel.module.css";
-import { SelectItemPerPage } from "../form/SelectItemPerPage";
-import { GrConfigure } from "react-icons/gr";
-import { useState } from "react";
-import { Input } from "../form/Input";
 
 export const Panel = ({
   state,
   loading,
   search_value,
+  handleOnChange_config,
   handleOnChange_pagination,
   handleOnChange_search,
   handleOnChange_refresh,
   handleOnChange_itemPerPage,
+  handleOnChange_delete,
   navigate_edit,
   navigate_create,
   module_title,
@@ -29,20 +28,20 @@ export const Panel = ({
   state: any;
   loading: boolean;
   search_value: string;
+  handleOnChange_config: any;
   handleOnChange_pagination: any;
   handleOnChange_search: any;
   handleOnChange_refresh: any;
   handleOnChange_itemPerPage: any;
+  handleOnChange_delete: any;
   navigate_edit: any;
   navigate_create: any;
   module_title: string;
   header_table: string[];
   table_index: string[];
 }) => {
-  const [searchValue, setSearchValue] = useState("");
-
   return (
-    <div className="card bg-dark text-white">
+    <div className={`${styles.Panel} card bg-dark text-white`}>
       <div className="card-body">
         <div className={styles.title_container}>
           <h2>{module_title}</h2>
@@ -57,50 +56,42 @@ export const Panel = ({
       </div>
       <div className="card bg-light text-dark">
         <div className={styles.search_container}>
-          <div>
-            <SelectItemPerPage
-              text="Itens Por Pagina"
-              name=""
-              options={[10, 25, 50, 100]}
-              handleOnChange={handleOnChange_itemPerPage}
-              value={state.itemPerPage}
-            />
-          </div>
-          <div className={styles.refreshAndAdd}>
-            <div>
-              {/* <Input erros={undefined} type={""} text={""} name={""} placeholder={""} handleOnChange={undefined} value={searchValue} customClass={""} readOnly={false} /> */}
-              <SearchInput
-                type="text"
-                text="Search"
-                name="myInput"
-                placeholder="Search"
-                handleOnChange={handleOnChange_search}
-                value={search_value}
-              />
-                    {/* <Input
-        type="text"
-        text="Descricão"
-        name="description"
-        placeholder="Digite a Descricão"
-        handleOnChange={handleOnChange_search}
-        value={search_value}
-        customClass=""
-        readOnly={false}
-        erros=""
-      />  */}
-            </div>
-            <div className={styles.itens}>
-              <LinkIcon
-                to={navigate_create}
-                icon={<IoIosAddCircleOutline size={30} />}
-                customClass={""}
+          <div className="row">
+            <div className="col-6">
+              <SelectItemPerPage
+                text="Itens Por Pagina"
+                name=""
+                options={[10, 25, 50, 100]}
+                handleOnChange={handleOnChange_itemPerPage}
+                value={state.itemPerPage}
               />
             </div>
-            <div className={styles.itens}>
-              <HiRefresh size={30} onClick={handleOnChange_refresh} />
-            </div>
-            <div className={styles.itens}>
-              <GrConfigure size={30} />
+            <div className="col-6">
+              <div className={styles.refreshAndAdd}>
+                <div>
+                  <SearchInput
+                    type="text"
+                    text="Search"
+                    name="myInput"
+                    placeholder="Search"
+                    handleOnChange={handleOnChange_search}
+                    value={search_value}
+                  />
+                </div>
+                <div className={styles.itens}>
+                  <LinkIcon
+                    to={navigate_create}
+                    icon={<IoIosAddCircleOutline size={30} />}
+                    customClass={""}
+                  />
+                </div>
+                <div className={styles.itens}>
+                  <HiRefresh size={30} onClick={handleOnChange_refresh} />
+                </div>
+                <div className={styles.itens}>
+                  <GrConfigure size={30} onClick={handleOnChange_config} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -132,7 +123,12 @@ export const Panel = ({
                           />
                         </div>
                         <div>
-                          <MdOutlineDeleteOutline size={20} />
+                          <MdOutlineDeleteOutline
+                            size={20}
+                            onClick={() => {
+                              handleOnChange_delete(project);
+                            }}
+                          />
                         </div>
                       </div>
                     </td>
@@ -144,6 +140,7 @@ export const Panel = ({
         <div className={styles.pagination_content}>
           <div>
             <p className={styles.pagination_p}>
+              {" "}
               Mostrando de {state.initIten} ate {state.lastIten} de{" "}
               {state.totalItens} registros
             </p>

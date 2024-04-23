@@ -14,7 +14,7 @@
 }
 
 .search_container {
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
     padding-top: 1em;
     padding-left: 1em;
@@ -23,6 +23,8 @@
 
 .refreshAndAdd {
     display: flex;
+    justify-content: end;
+
 }
 
 .itens {
@@ -61,4 +63,9 @@
 
 .table{
      margin-bottom: 0rem !important; 
+}
+
+.Panel{
+    width: 95%;
+    margin: auto
 }

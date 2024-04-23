@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { PermissionRequest } from '../types/PermissionRequest';
-import { Permission } from '../components/pages/Permission/Permission';
 
 const api_authentication = axios.create({
     baseURL: process.env.REACT_APP_API
@@ -38,6 +37,16 @@ export const authApi = () => ({
 
     createPermission: async (request: PermissionRequest) => {
         const response = await api.post('/v1/permission', request)
+            .then((res) => {
+                return res.data;
+            }).catch((error) => {
+                return error;
+            })
+        return response;
+    },
+
+    deletePermission: async (id: string) => {
+        const response = await api.delete(`/v1/permission/${id}`)
             .then((res) => {
                 return res.data;
             }).catch((error) => {

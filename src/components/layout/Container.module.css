@@ -3,13 +3,10 @@
   justify-content: space-between;
   margin: 0 auto;
   flex-wrap: wrap;
+  height: 86vh;
 }
 
 .container_Panel{
   width: -webkit-fill-available;
-  margin-left: 5em;
-  margin-right: 5em;
   margin-top: 1%;
-  /* margin-bottom: 2em; */
-  height: 75vh;
 }

@@ -6,10 +6,10 @@ export type PermissionResponse = {
     permission: any;
 }
 
-export type Permission = {
+export type PermissionDTO = {
     id: number,
     permission: string,
     description: string
 }
 
-export type TPermissionList = Permission[]
+export type TPermissionList = PermissionDTO[]
