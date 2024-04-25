@@ -53,5 +53,9 @@ export const authApi = () => ({
                 return error;
             })
         return response;
+    },
+
+    getPermission: async (id: string) => {
+        return await api.get(`/v1/permission/${id}`);
     }
 });

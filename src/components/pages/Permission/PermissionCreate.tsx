@@ -15,7 +15,7 @@ export const PermissionCreate = () => {
   const handleOncreate = (request: PermissionRequest) => {
     auth.createPermission(request)
     .then((res) => {
-      navigate("/permission", { state: { message: "Permissão Criado com Sucesso" } });
+      navigate("/permission", { state: { message: "Permissão Criado com Sucesso", type: "success"} });
       console.log(res);
     })
     .catch((error) => {
@@ -25,7 +25,7 @@ export const PermissionCreate = () => {
   };
 
   return (
-    <Container customClass="start" msg={msg} type={messageType}>
+    <Container customClass="" msg={msg} type={messageType}>
       <div className={styles.new_Project}>
         <h1>Modulo de Criação de Permissão</h1>
         <p>

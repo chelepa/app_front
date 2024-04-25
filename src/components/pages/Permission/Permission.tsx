@@ -6,12 +6,12 @@ import { Panel } from "../../layout/Panel";
 import { ModalView } from "../../layout/ModalView";
 import { ConfigFormSearch } from "../../pages_form/permission_form/ConfigFormSearch";
 import { PermissionDTO } from '../../../types/PermissionResponse';
-import { Input } from "../../form/Input";
 import { FormViewDelete } from "../../pages_form/permission_form/FormViewDelete";
 
 
 export const Permission = () => {
   let msg = "";
+  let type = "success";
   let statePermission = {data: [], itemPerPage: 10, totalPages: 0, currentPage: 0, totalItens: 0, initIten: 0, lastIten: 0};
   const auth = useContext(PermissionContext);
   const location = useLocation();
@@ -32,6 +32,7 @@ export const Permission = () => {
 
   if (location.state) {
     msg = location.state.message;
+    type = location.state.type;
   }
 
   useEffect(() => {
@@ -77,8 +78,8 @@ export const Permission = () => {
   }
 
   return (
-    <Container customClass="start" msg={msg} type="success">
-      <div>
+    <Container customClass="" msg={msg} type={type}>
+      <div className="Container Permission">
         <Panel
           state={permissionState}
           loading={removeLoading}
