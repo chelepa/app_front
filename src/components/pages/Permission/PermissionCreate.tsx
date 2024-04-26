@@ -25,7 +25,7 @@ export const PermissionCreate = () => {
   };
 
   return (
-    <Container customClass="" msg={msg} type={messageType}>
+    <Container customClass="" msg={msg} type={messageType} showLoading={false}>
       <div className={styles.new_Project}>
         <h1>Modulo de Criação de Permissão</h1>
         <p>

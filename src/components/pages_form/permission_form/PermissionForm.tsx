@@ -59,7 +59,7 @@ export const PermissionForm = ({ textbutton, handleSubmit}: { textbutton: string
         erros={erros.permission}
       />
 
-      <SubmitButton text={textbutton} handleOnChange={handleCreate} customClass="btn_save_update"/>
+      <SubmitButton text={textbutton} handleOnChange={handleCreate} customClass="btn_save_update" customClassButton=""/>
     </div>
   );
 };

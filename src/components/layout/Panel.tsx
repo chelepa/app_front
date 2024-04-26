@@ -11,7 +11,6 @@ import styles from "./Panel.module.css";
 
 export const Panel = ({
   state,
-  loading,
   search_value,
   handleOnChange_config,
   handleOnChange_pagination,
@@ -26,7 +25,6 @@ export const Panel = ({
   table_index,
 }: {
   state: any;
-  loading: boolean;
   search_value: string;
   handleOnChange_config: any;
   handleOnChange_pagination: any;
@@ -95,7 +93,6 @@ export const Panel = ({
             </div>
           </div>
         </div>
-        {!loading && <Loading />}
         <div className={styles.table_overflow}>
           <table className={`${styles.table} table`}>
             <thead>

@@ -78,11 +78,10 @@ export const Permission = () => {
   }
 
   return (
-    <Container customClass="" msg={msg} type={type}>
+    <Container customClass="" msg={msg} type={type} showLoading={!removeLoading}>
       <div className="Container Permission">
         <Panel
           state={permissionState}
-          loading={removeLoading}
           search_value={searchValue}
           handleOnChange_config={handleConfigShow}
           handleOnChange_pagination={handlePagination}

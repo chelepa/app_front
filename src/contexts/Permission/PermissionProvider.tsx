@@ -21,8 +21,12 @@ export const PermissionProvider = ({ children }: { children: JSX.Element }) => {
     return await api.getPermission(id);
   };
 
+  const updatePermissionById = async (id: string, request: PermissionRequest) => {
+    return await api.updatePermission(id, request);
+  };
+
   return (
-    <PermissionContext.Provider value={{createPermission, getAllPermission, deletePermissionById, getPermissionById}}>
+    <PermissionContext.Provider value={{createPermission, getAllPermission, deletePermissionById, getPermissionById, updatePermissionById}}>
       {children}
     </PermissionContext.Provider>
   );

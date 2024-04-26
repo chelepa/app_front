@@ -46,16 +46,14 @@ export const authApi = () => ({
     },
 
     deletePermission: async (id: string) => {
-        const response = await api.delete(`/v1/permission/${id}`)
-            .then((res) => {
-                return res.data;
-            }).catch((error) => {
-                return error;
-            })
-        return response;
+        return await api.delete(`/v1/permission/${id}`);
     },
 
     getPermission: async (id: string) => {
         return await api.get(`/v1/permission/${id}`);
+    },
+
+    updatePermission: async (id: string, request: PermissionRequest) => {
+        return await api.put(`/v1/permission/${id}`, request);
     }
 });

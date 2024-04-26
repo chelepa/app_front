@@ -20,8 +20,13 @@
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 0.4em;
+  padding-bottom: 0.5em;
   display: flex;
   justify-content: space-between;
+}
+
+.panel_boby_Identification .h4 {
+  padding-top: 0.3em;
 }
 
 .panel_header_delete{
