@@ -2,11 +2,9 @@ import { Pagination } from "react-bootstrap";
 import { GrConfigure, GrEdit } from "react-icons/gr";
 import { HiRefresh } from "react-icons/hi";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { MdOutlineDeleteOutline } from "react-icons/md";
 import { LinkIcon } from "../form/LinkIcon";
 import { SearchInput } from "../form/SearchInput";
 import { SelectItemPerPage } from "../form/SelectItemPerPage";
-import { Loading } from "./Loading";
 import styles from "./Panel.module.css";
 
 export const Panel = ({
@@ -17,7 +15,6 @@ export const Panel = ({
   handleOnChange_search,
   handleOnChange_refresh,
   handleOnChange_itemPerPage,
-  handleOnChange_delete,
   navigate_edit,
   navigate_create,
   module_title,
@@ -31,7 +28,6 @@ export const Panel = ({
   handleOnChange_search: any;
   handleOnChange_refresh: any;
   handleOnChange_itemPerPage: any;
-  handleOnChange_delete: any;
   navigate_edit: any;
   navigate_create: any;
   module_title: string;
@@ -117,14 +113,6 @@ export const Panel = ({
                             to={`${navigate_edit}${project.id}`}
                             icon={<GrEdit size={20} />}
                             customClass={""}
-                          />
-                        </div>
-                        <div>
-                          <MdOutlineDeleteOutline
-                            size={20}
-                            onClick={() => {
-                              handleOnChange_delete(project);
-                            }}
                           />
                         </div>
                       </div>

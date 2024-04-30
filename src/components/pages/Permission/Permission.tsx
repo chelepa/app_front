@@ -2,12 +2,9 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { PermissionContext } from "../../../contexts/Permission/PermissionContext";
 import { Container } from "../../layout/Container";
-import { Panel } from "../../layout/Panel";
 import { ModalView } from "../../layout/ModalView";
+import { Panel } from "../../layout/Panel";
 import { ConfigFormSearch } from "../../pages_form/permission_form/ConfigFormSearch";
-import { PermissionDTO } from '../../../types/PermissionResponse';
-import { FormViewDelete } from "../../pages_form/permission_form/FormViewDelete";
-
 
 export const Permission = () => {
   let msg = "";
@@ -17,17 +14,13 @@ export const Permission = () => {
   const location = useLocation();
   const [removeLoading, setRemoveLoading] = useState(false);
   const [permissionState, setStatePermission] = useState(statePermission);
-  const [permissionDTO, setPermissionDTO] = useState<PermissionDTO>({id: 0, permission: "", description: ""});
   const [searchValue, setSearchValue] = useState("");
   const [showModalConfigSearch, setShowModalConfigSearch] = useState(false);
-  const [showModalDelete, setShowModalDelete] = useState(false);
   const [searchParam, setSearchParam] = useState("description");
 
 
   const handleConfigClose = () => setShowModalConfigSearch(false);
   const handleConfigShow = () => setShowModalConfigSearch(true);
-  const handleModalDeleteClose = () => setShowModalDelete(false);
-  const handleModalDeleteShow = () => setShowModalDelete(true);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearchParam(e.target.value);
 
   if (location.state) {
@@ -64,19 +57,6 @@ export const Permission = () => {
     functionGetPermission(permissionState.currentPage, permissionState.itemPerPage, "", "");
   }
 
-  const handleShowModalDelete = (event: any) => {
-    setPermissionDTO(event);
-    handleModalDeleteShow();
-  }
-
-  const handleDelete2 = () => {
-    let id = String (permissionDTO.id);
-    auth.deletePermissionById(id);
-    handleModalDeleteClose();
-    setRemoveLoading(false);
-    functionGetPermission(permissionState.currentPage, permissionState.itemPerPage, "", "");
-  }
-
   return (
     <Container customClass="" msg={msg} type={type} showLoading={!removeLoading}>
       <div className="Container Permission">
@@ -88,7 +68,6 @@ export const Permission = () => {
           handleOnChange_search={handleSearch}
           handleOnChange_refresh={handleRefresh}
           handleOnChange_itemPerPage={handleSetItemPerPage}
-          handleOnChange_delete={handleShowModalDelete}
           navigate_edit={"/permission/"}
           navigate_create={"/permission/create"}
           module_title="Permissões"
@@ -103,14 +82,6 @@ export const Permission = () => {
           />
         </ModalView>
 
-        <ModalView show={showModalDelete} handleClose={handleModalDeleteClose} title={"Confirmação de Exclusão"} handleOnChangeButton={handleDelete2}>
-          <FormViewDelete 
-            pText="Voce deseja Escluir permanentemente a permissão Abaixo?" 
-            id={String(permissionDTO.id)} 
-            description={permissionDTO.description} 
-            permission={permissionDTO.permission}
-          />
-        </ModalView>
       </div>
     </Container>
   );
