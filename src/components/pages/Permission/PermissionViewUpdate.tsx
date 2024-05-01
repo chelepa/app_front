@@ -61,8 +61,8 @@ export const PermissionViewUpdate = () => {
 
   return (
     <Container customClass="start" msg={msg} type={messageType} showLoading={showLoading}>
-      <PanelBobyView title="Configuracões" txtButton="Voltar a listagem" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdateOrCreate={updateById} showPermissionFrom={showPermissionFrom}>
-          <PanelView title="Identificacão" txtButton={showPermissionFrom ? "Editar Permissão" : "Fechar"} handleOnChange={togglePermissionForm} customClassButton="color_black" enableButton={true}>
+      <PanelBobyView title="Modulo de Edicão" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdateOrCreate={updateById} showPermissionFrom={showPermissionFrom}>
+          <PanelView title="Identificacão" txtButton={showPermissionFrom ? "Editar" : "Fechar"} handleOnChange={togglePermissionForm}>
             <PermissionFormUpdate 
               permissionDTO={permissionDTO}
               handlePermissionInput={handlePermissionInput} 
