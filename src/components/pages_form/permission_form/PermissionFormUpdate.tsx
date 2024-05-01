@@ -2,7 +2,7 @@ import { PermissionRequest } from "../../../types/PermissionRequest";
 import { PermissionDTO } from "../../../types/PermissionResponse";
 import { Input } from "../../form/Input";
 
-export const PermissionForm = ({
+export const PermissionFormUpdate = ({
   permissionDTO,
   handlePermissionInput,
   showPermissionFrom,

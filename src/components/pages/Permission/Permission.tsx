@@ -105,6 +105,6 @@ export const Permission = () => {
       .catch((error) => {
         console.error(error);
       });
-    }, 3000);
+    }, 2000);
   }
 }

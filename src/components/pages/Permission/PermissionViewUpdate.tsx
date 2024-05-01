@@ -6,7 +6,7 @@ import { PermissionDTO } from "../../../types/PermissionResponse";
 import { Container } from "../../layout/Container";
 import { PanelView } from "../../layout/PanelView";
 import { PanelBobyView } from "../../layout/PanelBobyView";
-import { PermissionForm } from "../../pages_form/permission_form/PermissionForm2";
+import { PermissionFormUpdate } from "../../pages_form/permission_form/PermissionFormUpdate";
 
 export const PermissionViewUpdate = () => {
   let msg = "";
@@ -61,9 +61,9 @@ export const PermissionViewUpdate = () => {
 
   return (
     <Container customClass="start" msg={msg} type={messageType} showLoading={showLoading}>
-      <PanelBobyView title="Configuracões" txtButton="Voltar a listagem" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdate={updateById} showPermissionFrom={showPermissionFrom}>
-          <PanelView title="Identificacão" txtButton={showPermissionFrom ? "Editar Permissão" : "Fechar"} handleOnChange={togglePermissionForm} customClassButton="color_black">
-            <PermissionForm 
+      <PanelBobyView title="Configuracões" txtButton="Voltar a listagem" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdateOrCreate={updateById} showPermissionFrom={showPermissionFrom}>
+          <PanelView title="Identificacão" txtButton={showPermissionFrom ? "Editar Permissão" : "Fechar"} handleOnChange={togglePermissionForm} customClassButton="color_black" enableButton={true}>
+            <PermissionFormUpdate 
               permissionDTO={permissionDTO}
               handlePermissionInput={handlePermissionInput} 
               showPermissionFrom={showPermissionFrom} 

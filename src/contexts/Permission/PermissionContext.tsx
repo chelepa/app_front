@@ -4,7 +4,7 @@ import { PermissionRequest } from "../../types/PermissionRequest";
 import { AxiosResponse } from "axios";
 
 export type PermissionContext = {
-    createPermission: (request: PermissionRequest) => Promise<PermissionResponse>;
+    createPermission: (request: PermissionRequest) => Promise<AxiosResponse<PermissionResponse>>;
     getAllPermission: (page: number, size: number, permission: string, description: string) => Promise<PermissionResponse>;
     getPermissionById: (id: string) => Promise<AxiosResponse<PermissionDTO>>;
     deletePermissionById: (id: string) => Promise<AxiosResponse<void>>;

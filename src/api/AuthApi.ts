@@ -36,13 +36,7 @@ export const authApi = () => ({
     },
 
     createPermission: async (request: PermissionRequest) => {
-        const response = await api.post('/v1/permission', request)
-            .then((res) => {
-                return res.data;
-            }).catch((error) => {
-                return error;
-            })
-        return response;
+        return await api.post('/v1/permission', request);
     },
 
     deletePermission: async (id: string) => {
