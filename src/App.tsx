@@ -1,13 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from './contexts/Auth/AuthContext';
 import { Container } from './components/layout/Container';
 import { Footer } from './components/layout/Footer';
 import { Header } from './components/layout/Header';
-import { Home } from './components/pages/Home/Home';
-import { Permission } from './components/pages/Permission/Permission';
+import { RouteDefault } from './components/rotes/RouteDefault';
+import { RoutePermission } from './components/rotes/RoutePermission';
+import { AuthContext } from './contexts/Auth/AuthContext';
 import { PermissionProvider } from './contexts/Permission/PermissionProvider';
-import { PermissionCreate } from './components/pages/Permission/PermissionCreate';
+import { ContainerApp } from './components/layout/ContainerApp';
 
 function App() {
   const auth = useContext(AuthContext);
@@ -18,15 +17,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header handleLogout={handleLogout}/>
-      <Container customClass=''>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/permission" element={<PermissionProvider><Permission/></PermissionProvider>} />
-          <Route path="/permission/create" element={<PermissionProvider><PermissionCreate/></PermissionProvider>} />
-        </Routes>
-      </Container>
-      <Footer/>
+      <Header handleLogout={handleLogout} />
+      <ContainerApp>
+        <div className="App1">
+          <RouteDefault/>
+          <PermissionProvider><RoutePermission /></PermissionProvider>
+        </div>
+      </ContainerApp>
+      <Footer />
     </div>
   );
 }

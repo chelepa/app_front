@@ -9,6 +9,14 @@
     width: -webkit-fill-available;
 }
 
+.color_delete{
+    background-color: #f00;
+}
+
+.color_black{
+    background-color: #222;
+}
+
 .btn::hover{
     color: #ffbb33;
 }

@@ -63,7 +63,7 @@ export const Login = () => {
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <SubmitButton text="Submit" handleOnChange={handleLogin} customClass=""/>
+            <SubmitButton text="Submit" handleOnChange={handleLogin} customClass="" customClassButton=""/>
           </div>
           <p className="forgot-password text-right mt-2">
             Esqueceu sua <a href="#"> Senha?</a>

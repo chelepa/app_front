@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { PermissionRequest } from '../types/PermissionRequest';
 
 const api_authentication = axios.create({
     baseURL: process.env.REACT_APP_API
@@ -17,13 +18,36 @@ export const authApi = () => ({
         return response.data;
     },
 
-    getAllPermission: async () => {
-        const response = await api.get('/v1/permission')
+    getAllPermission: async (page: number, size: number, permission: string, description: string) => {
+        const response = await api.get('/v1/permission', {
+            params: {
+                page: page,
+                size: size,
+                permission: permission,
+                description: description
+            }
+        })
             .then((res) => {
                 return res.data;
             }).catch((error) => {
                 return error;
             })
         return response;
+    },
+
+    createPermission: async (request: PermissionRequest) => {
+        return await api.post('/v1/permission', request);
+    },
+
+    deletePermission: async (id: string) => {
+        return await api.delete(`/v1/permission/${id}`);
+    },
+
+    getPermission: async (id: string) => {
+        return await api.get(`/v1/permission/${id}`);
+    },
+
+    updatePermission: async (id: string, request: PermissionRequest) => {
+        return await api.put(`/v1/permission/${id}`, request);
     }
 });

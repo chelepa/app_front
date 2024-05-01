@@ -1,7 +1,15 @@
 export type PermissionResponse = {
-    id: number;
-    permission: string;
-    description: string;
+    page: number;
+    size: number;
+    totalPages: number;
+    totalItem: number;
+    permission: any;
 }
 
-export type TPermissionList = PermissionResponse[]
+export type PermissionDTO = {
+    id: number,
+    permission: string,
+    description: string
+}
+
+export type TPermissionList = PermissionDTO[]
