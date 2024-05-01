@@ -22,7 +22,18 @@ export const PermissionViewUpdate = () => {
   const novosErros: Partial<PermissionRequest> = {};
 
   useEffect(() => { 
-    search(String (id)) 
+    setTimeout(() => {
+      auth.getPermissionById(String (id))
+      .then((res) => {
+        setPermissionDTO(res.data);
+        setPermissionRequest((prev) => ({...prev, description : res.data.description, permission : res.data.permission}));
+        setShowLoading(!showLoading);
+      })
+      .catch((error) => {
+        console.error(error);
+        navigate("/permission", {state: { message: "Permissão Não Encontrada", type: "error" }});
+      });
+    }, 100)
   }, [id]);
 
   const togglePermissionForm = () => {
@@ -61,8 +72,8 @@ export const PermissionViewUpdate = () => {
 
   return (
     <Container customClass="start" msg={msg} type={messageType} showLoading={showLoading}>
-      <PanelBobyView title="Configuracões" txtButton="Voltar a listagem" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdateOrCreate={updateById} showPermissionFrom={showPermissionFrom}>
-          <PanelView title="Identificacão" txtButton={showPermissionFrom ? "Editar Permissão" : "Fechar"} handleOnChange={togglePermissionForm} customClassButton="color_black" enableButton={true}>
+      <PanelBobyView title="Modulo de Edicão" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdateOrCreate={updateById} showPermissionFrom={showPermissionFrom}>
+          <PanelView title="Identificacão" txtButton={showPermissionFrom ? "Editar" : "Fechar"} handleOnChange={togglePermissionForm}>
             <PermissionFormUpdate 
               permissionDTO={permissionDTO}
               handlePermissionInput={handlePermissionInput} 
@@ -94,20 +105,5 @@ export const PermissionViewUpdate = () => {
       console.error(error);
       navigate("/permission", {state: { message: "Erro ao remover a permissão", type: "error" }});
     });
-  }
-
-  function search(id: string) {
-    setTimeout(() => {
-      auth.getPermissionById(id)
-      .then((res) => {
-        setPermissionDTO(res.data);
-        setPermissionRequest((prev) => ({...prev, description : res.data.description, permission : res.data.permission}));
-        setShowLoading(!showLoading);
-      })
-      .catch((error) => {
-        console.error(error);
-        navigate("/permission", {state: { message: "Permissão Não Encontrada", type: "error" }});
-      });
-    }, 100)
   }
 };

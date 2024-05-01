@@ -1,15 +1,21 @@
 import { LinkButton } from "../form/LinkButton";
+import { LinkIcon } from "../form/LinkIcon";
 import { PanelAction } from "./PanelAction";
 import styles from "./PanelBobyView.module.css";
+import { PiKeyReturn } from "react-icons/pi";
 
-export const PanelBobyView = ({title, txtButton, redirect, children, handleOnChangeDelete, handleOnChangeUpdateOrCreate, showPermissionFrom}: {title: string; txtButton: string; redirect: string; children: JSX.Element, handleOnChangeDelete:any, handleOnChangeUpdateOrCreate:any, showPermissionFrom: boolean}) => {
+export const PanelBobyView = ({title, redirect, children, handleOnChangeDelete, handleOnChangeUpdateOrCreate, showPermissionFrom}: {title: string; redirect: string; children: JSX.Element, handleOnChangeDelete:any, handleOnChangeUpdateOrCreate:any, showPermissionFrom: boolean}) => {
   return (
-    <div className={`${styles.Panel} card bg-primary text-white`}>
+    <div className={`${styles.Panel} card bg-dark text-white`}>
       <div className="card-body">
         <div className={styles.header_panel}>
           <h2>{title}</h2>
           <div className={styles.header_panel_button}>
-            <LinkButton to={redirect} text={txtButton} />
+            <LinkIcon
+              to={redirect}
+              icon={<PiKeyReturn size={60} />}
+              customClass={"btn_color_white"}
+            />
           </div>
         </div>
       </div>
