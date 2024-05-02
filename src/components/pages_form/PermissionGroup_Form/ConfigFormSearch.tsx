@@ -7,12 +7,12 @@ export const ConfigFormSearch = ({handleChange, searchParam}: {handleChange: any
         <div className="row">
           <div className="col-6">
             <Form.Check
-              value="permission"
+              value="name"
               type="radio"
               aria-label="radio 1"
-              label="Permissao"
+              label="Nome"
               onChange={handleChange}
-              checked={searchParam === "permission"}
+              checked={searchParam === "name"}
             />
           </div>
           <div className="col-6">

@@ -1,7 +1,9 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { Container } from "../../layout/Container";
-import { Panel } from "../../layout/Panel";
 import { PermissionGroupContext } from "../../../contexts/PermissionGroup/PermissionGroupContext";
+import { Container } from "../../layout/Container";
+import { ModalView } from "../../layout/ModalView";
+import { Panel } from "../../layout/Panel";
+import { ConfigFormSearch } from "../../pages_form/PermissionGroup_Form/ConfigFormSearch";
 
 export const HomePermissionGroup = () => {
     let state = {data: [], itemPerPage: 10, totalPages: 0, currentPage: 0, totalItens: 0, initIten: 0, lastIten: 0};
@@ -10,6 +12,11 @@ export const HomePermissionGroup = () => {
     const [groupPermission, setGroupPermission] = useState(state);
     const [searchValue, setSearchValue] = useState("");
     const [searchParam, setSearchParam] = useState("description");
+    const [showModalConfigSearch, setShowModalConfigSearch] = useState(false);
+
+    const handleConfigClose = () => setShowModalConfigSearch(false);
+    const handleConfigShow = () => setShowModalConfigSearch(true);
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearchParam(e.target.value);
 
     useEffect(() => {
         functionGetAllGroupPermission(groupPermission.currentPage, groupPermission.itemPerPage, "", "");
@@ -41,10 +48,11 @@ export const HomePermissionGroup = () => {
 
     return(
         <Container customClass="" msg="" type="" showLoading={!removeLoading}>
+        <>
             <Panel
                 state={groupPermission}
                 search_value= {searchValue}
-                handleOnChange_config={null}
+                handleOnChange_config={handleConfigShow}
                 handleOnChange_pagination={handlePagination}
                 handleOnChange_search={handleSearch}
                 handleOnChange_refresh={handleRefresh}
@@ -55,6 +63,11 @@ export const HomePermissionGroup = () => {
                 header_table={["#", "Nome", "Descricão"]}
                 table_index={["id", "name", "description"]}
             />
+
+            <ModalView show={showModalConfigSearch} handleClose={handleConfigClose} title={"Configuração de Pesquisa"} handleOnChangeButton={handleConfigClose}>
+                <ConfigFormSearch handleChange={handleChange} searchParam={searchParam}/>
+            </ModalView>
+        </>
         </Container>
     )
 
@@ -75,7 +88,6 @@ export const HomePermissionGroup = () => {
           })
           .catch((error) => {
             console.error(error);
-            // navigate("/permission", {state: { message: "Erro ao Criar a permissão", type: "error" }});
-          });
+        });
     }
 }
