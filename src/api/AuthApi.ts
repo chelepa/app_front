@@ -49,5 +49,9 @@ export const authApi = () => ({
 
     updatePermission: async (id: string, request: PermissionRequest) => {
         return await api.put(`/v1/permission/${id}`, request);
-    }
+    }, 
+
+    getAllGroupPermission: async (page: number, size: number, name: string, description: string) => {
+        return await api.get('/v1/group', {params: { page: page, size: size, name: name, description: description}})
+    },
 });

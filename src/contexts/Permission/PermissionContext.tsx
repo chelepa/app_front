@@ -1,7 +1,7 @@
-import { createContext } from "react";
-import { PermissionDTO, PermissionResponse } from "../../types/PermissionResponse";
-import { PermissionRequest } from "../../types/PermissionRequest";
 import { AxiosResponse } from "axios";
+import { createContext } from "react";
+import { PermissionRequest } from "../../types/PermissionRequest";
+import { PermissionDTO, PermissionResponse } from "../../types/PermissionResponse";
 
 export type PermissionContext = {
     createPermission: (request: PermissionRequest) => Promise<AxiosResponse<PermissionResponse>>;

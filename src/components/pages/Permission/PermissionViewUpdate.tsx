@@ -4,8 +4,8 @@ import { PermissionContext } from "../../../contexts/Permission/PermissionContex
 import { PermissionRequest } from "../../../types/PermissionRequest";
 import { PermissionDTO } from "../../../types/PermissionResponse";
 import { Container } from "../../layout/Container";
-import { PanelView } from "../../layout/PanelView";
 import { PanelBobyView } from "../../layout/PanelBobyView";
+import { PanelView } from "../../layout/PanelView";
 import { PermissionFormUpdate } from "../../pages_form/permission_form/PermissionFormUpdate";
 
 export const PermissionViewUpdate = () => {

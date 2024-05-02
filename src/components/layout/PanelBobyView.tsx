@@ -1,8 +1,7 @@
-import { LinkButton } from "../form/LinkButton";
+import { PiKeyReturn } from "react-icons/pi";
 import { LinkIcon } from "../form/LinkIcon";
 import { PanelAction } from "./PanelAction";
 import styles from "./PanelBobyView.module.css";
-import { PiKeyReturn } from "react-icons/pi";
 
 export const PanelBobyView = ({title, redirect, children, handleOnChangeDelete, handleOnChangeUpdateOrCreate, showPermissionFrom}: {title: string; redirect: string; children: JSX.Element, handleOnChangeDelete:any, handleOnChangeUpdateOrCreate:any, showPermissionFrom: boolean}) => {
   return (
