@@ -1,6 +1,5 @@
-import { SubmitButton } from "../form/SubmitButton";
 import { Modal } from "react-bootstrap";
-import styles from "./Modal.module.css";
+import { SubmitButton } from "../form/SubmitButton";
 
 export const ModalView = ({show, handleClose, handleOnChangeButton, title, children}: {handleOnChangeButton: any, show:any, handleClose:any, title:string, children: JSX.Element }) => {
   return (

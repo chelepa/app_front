@@ -18,7 +18,6 @@ export const Permission = () => {
   const [showModalConfigSearch, setShowModalConfigSearch] = useState(false);
   const [searchParam, setSearchParam] = useState("description");
 
-
   const handleConfigClose = () => setShowModalConfigSearch(false);
   const handleConfigShow = () => setShowModalConfigSearch(true);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearchParam(e.target.value);
@@ -76,10 +75,7 @@ export const Permission = () => {
         />
 
         <ModalView show={showModalConfigSearch} handleClose={handleConfigClose} title={"Configuração de Pesquisa"} handleOnChangeButton={handleConfigClose}>
-          <ConfigFormSearch 
-            handleChange={handleChange} 
-            searchParam={searchParam}
-          />
+          <ConfigFormSearch handleChange={handleChange} searchParam={searchParam}/>
         </ModalView>
 
       </div>
