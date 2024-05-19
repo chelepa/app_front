@@ -4,10 +4,14 @@ import { Container } from "../../layout/Container";
 import { ModalView } from "../../layout/ModalView";
 import { Panel } from "../../layout/Panel";
 import { ConfigFormSearch } from "../../pages_form/PermissionGroup_Form/ConfigFormSearch";
+import { useLocation } from "react-router-dom";
 
 export const HomePermissionGroup = () => {
+    let msg = "";
+    let type = "success";
     let state = {data: [], itemPerPage: 10, totalPages: 0, currentPage: 0, totalItens: 0, initIten: 0, lastIten: 0};
     const auth = useContext(PermissionGroupContext);
+    const location = useLocation();
     const [removeLoading, setRemoveLoading] = useState(false);
     const [groupPermission, setGroupPermission] = useState(state);
     const [searchValue, setSearchValue] = useState("");
@@ -17,6 +21,11 @@ export const HomePermissionGroup = () => {
     const handleConfigClose = () => setShowModalConfigSearch(false);
     const handleConfigShow = () => setShowModalConfigSearch(true);
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearchParam(e.target.value);
+
+    if (location.state) {
+        msg = location.state.message;
+        type = location.state.type;
+      }
 
     useEffect(() => {
         functionGetAllGroupPermission(groupPermission.currentPage, groupPermission.itemPerPage, "", "");
@@ -47,7 +56,7 @@ export const HomePermissionGroup = () => {
     };
 
     return(
-        <Container customClass="" msg="" type="" showLoading={!removeLoading}>
+        <Container customClass="" msg={msg} type={type} showLoading={!removeLoading}>
         <>
             <Panel
                 state={groupPermission}

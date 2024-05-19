@@ -9,7 +9,7 @@ export const PermissionGroupProvider = ({ children }: { children: JSX.Element })
     return await api.getAllGroupPermission(page, size, name, description);
   };
 
-  const getGroupPermissionById = async (id: string) => {
+  const getGroupPermissionById = async (id: number) => {
     return await api.getGroupPermissionbyId(id);
   };
 
@@ -18,12 +18,15 @@ export const PermissionGroupProvider = ({ children }: { children: JSX.Element })
   };
 
   const updateGroupPermission = async (id: number, request: GroupPermissionRequest) => {
-    console.log(request);
     return await api.updateGroupPermissionbyId(id, request);
   };
 
+  const deleteGroupPermissionById = async (id: number) => {
+    return await api.deleteGroupPermissionbyId(id);
+  };
+
   return (
-    <PermissionGroupContext.Provider value={{getAllGroupPermission, getGroupPermissionById, getAllPermission, updateGroupPermission}}>
+    <PermissionGroupContext.Provider value={{getAllGroupPermission, getGroupPermissionById, getAllPermission, updateGroupPermission, deleteGroupPermissionById}}>
       {children}
     </PermissionGroupContext.Provider>
   );

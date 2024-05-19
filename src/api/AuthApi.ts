@@ -56,11 +56,15 @@ export const authApi = () => ({
         return await api.get('/v1/group', {params: { page: page, size: size, name: name, description: description}})
     },
 
-    getGroupPermissionbyId: async (id: string) => {
+    getGroupPermissionbyId: async (id: number) => {
         return await api.get(`/v1/group/${id}`);
     },
 
     updateGroupPermissionbyId: async (id: number, request: GroupPermissionRequest) => {
         return await api.put(`/v1/group/${id}`, request);
+    }, 
+
+    deleteGroupPermissionbyId: async (id: number) => {
+        return await api.delete(`/v1/group/${id}`);
     }, 
 });

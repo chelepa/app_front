@@ -6,8 +6,8 @@ export const RoutePermissionGroup = () => {
   return (
     <Routes>
       <Route path="/group" element={<HomePermissionGroup />} />
-      {/* <Route path="/group/create" element={<PermissionCreate />} /> */}
       <Route path="/group/:id" element={<UpdatePermissionGroup />} />
+      {/* <Route path="/group/create" element={<PermissionCreate />} /> */}
     </Routes>
   );
 };

@@ -71,6 +71,11 @@ export const UpdatePermissionGroup = () => {
           }
     };
 
+    const deleteGroupPermission = () => {
+        console.log("deletando o grupo de permissao id: " + groupPermission.id)
+        deleteGroupPermissionAPI(groupPermission.id)
+    };
+
     const handleOnChangeSelectItem = (event: ChangeEvent<HTMLInputElement>) => {
         setSelectItem(permission.filter(item => item.id === Number(event.target.value))[0])
     }
@@ -90,17 +95,18 @@ export const UpdatePermissionGroup = () => {
     };
 
     useEffect(() => {
-        functionGetGroupPermissionById(String (id));
+        let id2 = Number (id);
+        functionGetGroupPermissionById(id2);
         getAllPermission();
     }, []);
 
     return (
         <Container customClass="start" msg={msg} type={messageType} showLoading={showLoading}>
             <>
-                <PanelBobyView title="Modulo de Edicão" redirect="/group" handleOnChangeDelete={null} handleOnChangeUpdateOrCreate={updateGroupPermission} showPermissionFrom={showPermissionFrom}>
+                <PanelBobyView title="Modulo de Edicão" redirect="/group" handleOnChangeDelete={deleteGroupPermission} handleOnChangeUpdateOrCreate={updateGroupPermission} showPermissionFrom={showPermissionFrom}>
                     <PanelViewPagination 
                         pagination={["Grupo de Permissao", "Permissoes"]} 
-                        txtButton={showPermissionFrom ? "Editar" : "Fechar"} 
+                        txtButton={showPermissionFrom ? "Editar" : "Fechar"}  
                         handleOnChange={togglePermissionForm} 
                         handleOnChangeNav={handleOnChangeNav} 
                         navEnable={navAction} 
@@ -133,7 +139,7 @@ export const UpdatePermissionGroup = () => {
         </Container>
     )
 
-    function functionGetGroupPermissionById(id: string) {
+    function functionGetGroupPermissionById(id: number) {
         auth.getGroupPermissionById(id)
         .then((res) => {
             setGroupPermission(res.data);
@@ -161,10 +167,22 @@ export const UpdatePermissionGroup = () => {
     function updateGroupPermissionAPI(id: number, groupPermissionRequest: GroupPermissionRequest) {   
         auth.updateGroupPermission(id, groupPermissionRequest)
         .then((res) => {
-            console.log("Success" + res.data);
+            navigate("/group", {state: { message: "Grupo de Permissão Atualizada com Sucesso", type: "success" }});
         })
         .catch((error) => {
           console.error(error);
+          navigate("/group", {state: { message: "Erro ao Atualizar o Grupo de Permissão", type: "error" }});
+        });
+    }
+
+    function deleteGroupPermissionAPI(id: number) {   
+        auth.deleteGroupPermissionById(id)
+        .then((res) => {
+            navigate("/group", {state: { message: "Grupo de Permissão Removida com Sucesso", type: "success" }});
+        })
+        .catch((error) => {
+          console.error(error);
+          navigate("/group", {state: { message: "Erro ao Remover o Grupo de Permissão", type: "error" }});
         });
     }
 }
