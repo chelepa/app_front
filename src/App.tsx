@@ -1,12 +1,13 @@
 import { useContext } from 'react';
-import { Container } from './components/layout/Container';
+import { ContainerApp } from './components/layout/ContainerApp';
 import { Footer } from './components/layout/Footer';
 import { Header } from './components/layout/Header';
 import { RouteDefault } from './components/rotes/RouteDefault';
 import { RoutePermission } from './components/rotes/RoutePermission';
 import { AuthContext } from './contexts/Auth/AuthContext';
 import { PermissionProvider } from './contexts/Permission/PermissionProvider';
-import { ContainerApp } from './components/layout/ContainerApp';
+import { RoutePermissionGroup } from './components/rotes/RoutePermissionGroup';
+import { PermissionGroupProvider } from './contexts/PermissionGroup/PermissionGroupProvider';
 
 function App() {
   const auth = useContext(AuthContext);
@@ -19,10 +20,11 @@ function App() {
     <div className="App">
       <Header handleLogout={handleLogout} />
       <ContainerApp>
-        <div className="App1">
+        <>
           <RouteDefault/>
           <PermissionProvider><RoutePermission /></PermissionProvider>
-        </div>
+          <PermissionGroupProvider><RoutePermissionGroup/></PermissionGroupProvider>
+        </>
       </ContainerApp>
       <Footer />
     </div>

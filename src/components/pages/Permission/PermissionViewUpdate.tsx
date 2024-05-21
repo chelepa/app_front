@@ -4,8 +4,8 @@ import { PermissionContext } from "../../../contexts/Permission/PermissionContex
 import { PermissionRequest } from "../../../types/PermissionRequest";
 import { PermissionDTO } from "../../../types/PermissionResponse";
 import { Container } from "../../layout/Container";
-import { PanelView } from "../../layout/PanelView";
 import { PanelBobyView } from "../../layout/PanelBobyView";
+import { PanelView } from "../../layout/PanelView";
 import { PermissionFormUpdate } from "../../pages_form/permission_form/PermissionFormUpdate";
 
 export const PermissionViewUpdate = () => {
@@ -72,7 +72,7 @@ export const PermissionViewUpdate = () => {
 
   return (
     <Container customClass="start" msg={msg} type={messageType} showLoading={showLoading}>
-      <PanelBobyView title="Modulo de Edicão" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdateOrCreate={updateById} showPermissionFrom={showPermissionFrom}>
+      <PanelBobyView title="Modulo de Edicão" redirect="/permission" handleOnChangeDelete={deleteById} handleOnChangeUpdateOrCreate={updateById} saveOrDelete={showPermissionFrom}>
           <PanelView title="Identificacão" txtButton={showPermissionFrom ? "Editar" : "Fechar"} handleOnChange={togglePermissionForm}>
             <PermissionFormUpdate 
               permissionDTO={permissionDTO}

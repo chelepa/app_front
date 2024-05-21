@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { PermissionRequest } from '../types/PermissionRequest';
+import { GroupPermissionRequest } from '../types/Group';
 
 const api_authentication = axios.create({
     baseURL: process.env.REACT_APP_API
@@ -49,5 +50,25 @@ export const authApi = () => ({
 
     updatePermission: async (id: string, request: PermissionRequest) => {
         return await api.put(`/v1/permission/${id}`, request);
-    }
+    }, 
+
+    getAllGroupPermission: async (page: number, size: number, name: string, description: string) => {
+        return await api.get('/v1/group', {params: { page: page, size: size, name: name, description: description}})
+    },
+
+    getGroupPermissionbyId: async (id: number) => {
+        return await api.get(`/v1/group/${id}`);
+    },
+
+    updateGroupPermissionbyId: async (id: number, request: GroupPermissionRequest) => {
+        return await api.put(`/v1/group/${id}`, request);
+    }, 
+
+    deleteGroupPermissionbyId: async (id: number) => {
+        return await api.delete(`/v1/group/${id}`);
+    },
+
+    createGroupPermission: async (request: GroupPermissionRequest) => {
+        return await api.post('/v1/group', request);
+    },
 });
