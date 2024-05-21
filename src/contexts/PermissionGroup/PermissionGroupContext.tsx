@@ -9,6 +9,7 @@ export type PermissionGroupContext = {
     getGroupPermissionById: (id: number) => Promise<AxiosResponse<GroupPermission>>;
     updateGroupPermission: (id: number, request: GroupPermissionRequest) => Promise<AxiosResponse<GroupPermission>>;
     deleteGroupPermissionById: (id: number) => Promise<AxiosResponse<void>>;
+    createGroupPermission: (groupPermissionRequest: GroupPermissionRequest) => Promise<AxiosResponse<PermissionResponse>>;
 };
 
 export const PermissionGroupContext = createContext<PermissionGroupContext>(null!);

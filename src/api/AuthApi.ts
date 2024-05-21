@@ -66,5 +66,9 @@ export const authApi = () => ({
 
     deleteGroupPermissionbyId: async (id: number) => {
         return await api.delete(`/v1/group/${id}`);
-    }, 
+    },
+
+    createGroupPermission: async (request: GroupPermissionRequest) => {
+        return await api.post('/v1/group', request);
+    },
 });

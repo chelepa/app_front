@@ -103,7 +103,7 @@ export const UpdatePermissionGroup = () => {
     return (
         <Container customClass="start" msg={msg} type={messageType} showLoading={showLoading}>
             <>
-                <PanelBobyView title="Modulo de Edicão" redirect="/group" handleOnChangeDelete={deleteGroupPermission} handleOnChangeUpdateOrCreate={updateGroupPermission} showPermissionFrom={showPermissionFrom}>
+                <PanelBobyView title="Modulo de Edicão" redirect="/group" handleOnChangeDelete={deleteGroupPermission} handleOnChangeUpdateOrCreate={updateGroupPermission} saveOrDelete={showPermissionFrom}>
                     <PanelViewPagination 
                         pagination={["Grupo de Permissao", "Permissoes"]} 
                         txtButton={showPermissionFrom ? "Editar" : "Fechar"}  

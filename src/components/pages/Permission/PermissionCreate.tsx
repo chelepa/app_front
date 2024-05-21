@@ -42,7 +42,7 @@ export const PermissionCreate = () => {
 
   return (
     <Container customClass="" msg={msg} type={messageType} showLoading={false}>
-      <PanelBobyView title="Modulo de Cadastro" redirect="/permission" handleOnChangeDelete={""} handleOnChangeUpdateOrCreate={handleOncreate} showPermissionFrom={false}>
+      <PanelBobyView title="Modulo de Cadastro" redirect="/permission" handleOnChangeDelete={""} handleOnChangeUpdateOrCreate={handleOncreate} saveOrDelete={false}>
         <PanelView title="Permissão" txtButton={""} handleOnChange={""}>
           <PermissionFormCreate handlePermissionInput={handlePermissionInput} handleDescriptionInput={handleDescriptionInput} erros={erros} permissionRequest={permissionRequest}/>
         </PanelView>

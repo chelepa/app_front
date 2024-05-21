@@ -25,8 +25,12 @@ export const PermissionGroupProvider = ({ children }: { children: JSX.Element })
     return await api.deleteGroupPermissionbyId(id);
   };
 
+  const createGroupPermission = async (groupPermissionRequest: GroupPermissionRequest) => {
+    return await api.createGroupPermission(groupPermissionRequest);
+  };
+
   return (
-    <PermissionGroupContext.Provider value={{getAllGroupPermission, getGroupPermissionById, getAllPermission, updateGroupPermission, deleteGroupPermissionById}}>
+    <PermissionGroupContext.Provider value={{getAllGroupPermission, getGroupPermissionById, getAllPermission, updateGroupPermission, deleteGroupPermissionById, createGroupPermission}}>
       {children}
     </PermissionGroupContext.Provider>
   );
