@@ -110,7 +110,7 @@ export const UpdatePermissionGroup = () => {
                         handleOnChange={togglePermissionForm} 
                         handleOnChangeNav={handleOnChangeNav} 
                         navEnable={navAction} 
-                        enableAdd={!showPermissionFrom} 
+                        enableAdd={!showPermissionFrom && navAction === "Permissoes"} 
                         handleOnChangeAdd={handleConfigShow}>
                         <>
                             {(() => {
