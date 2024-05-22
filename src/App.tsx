@@ -8,6 +8,8 @@ import { AuthContext } from './contexts/Auth/AuthContext';
 import { PermissionProvider } from './contexts/Permission/PermissionProvider';
 import { RoutePermissionGroup } from './components/rotes/RoutePermissionGroup';
 import { PermissionGroupProvider } from './contexts/PermissionGroup/PermissionGroupProvider';
+import { RouteCustomer } from './components/rotes/RouteCustomer';
+import { CustomerProvider } from './contexts/Customer/CustomerProvider';
 
 function App() {
   const auth = useContext(AuthContext);
@@ -24,6 +26,7 @@ function App() {
           <RouteDefault/>
           <PermissionProvider><RoutePermission /></PermissionProvider>
           <PermissionGroupProvider><RoutePermissionGroup/></PermissionGroupProvider>
+          <CustomerProvider><RouteCustomer/></CustomerProvider>
         </>
       </ContainerApp>
       <Footer />

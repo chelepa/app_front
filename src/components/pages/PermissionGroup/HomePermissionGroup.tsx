@@ -25,7 +25,7 @@ export const HomePermissionGroup = () => {
     if (location.state) {
         msg = location.state.message;
         type = location.state.type;
-      }
+    }
 
     useEffect(() => {
         functionGetAllGroupPermission(groupPermission.currentPage, groupPermission.itemPerPage, "", "");

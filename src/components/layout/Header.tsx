@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import styles from './Header.module.css'
 import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { NavbarLink } from '../form/NavbarLink';
@@ -22,7 +21,7 @@ export const Header = ({ handleLogout }: { handleLogout: any }) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <NavbarLink to="/" value="Home"/>
-              {auth.hasPermission(["ADM"]) && <NavbarLink to="/usuarios" value="Usuarios"/>}
+              {auth.hasPermission(["ADM"]) && <NavbarLink to="/customer" value="Usuarios"/>}
               {auth.hasPermission(["ADM"]) && <NavbarLink to="/group" value="Grupo de Permissão"/>}
               {auth.hasPermission(["ADM"]) && <NavbarLink to="/permission" value="Permissão"/>}
               
