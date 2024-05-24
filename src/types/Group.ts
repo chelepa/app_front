@@ -20,3 +20,5 @@ export type GroupPermissionRequest = {
     description: string;
     permissionId: Number[];
 }
+
+export type TGroupPermissionList = GroupPermission[]

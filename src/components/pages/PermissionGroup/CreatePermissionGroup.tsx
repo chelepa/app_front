@@ -1,15 +1,14 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { PermissionDTO, TPermissionList } from "../../../types/PermissionResponse";
-import { SelectItem } from "../../form/SelectItem";
+import { SelectItemPermission } from "../../form/SelectItemPermission";
 import { Container } from "../../layout/Container";
 import { ModalView } from "../../layout/ModalView";
 import { PanelBobyView } from "../../layout/PanelBobyView";
 import { PanelViewPagination } from "../../layout/PanelViewPagination";
 import { PermissionGroupContext } from "../../../contexts/PermissionGroup/PermissionGroupContext";
 import { GroupPermissionRequest } from "../../../types/Group";
-import { Permission } from "../../pages_form/PermissionGroup_Form/Permission";
+import { CardPermission } from "../../pages_form/permission_form/CardPermission";
 import { PermissionGroupFormCreate } from "../../pages_form/PermissionGroup_Form/PermissionGroupFormCreate";
-import { Message } from "../../layout/Message";
 import { useNavigate } from "react-router-dom";
 
 export const CreatePermissionGroup = () => {
@@ -117,7 +116,7 @@ export const CreatePermissionGroup = () => {
                                             handleDescriptionInput={AddDescriptionInput} 
                                             erros={erros}/>
                                     } else {
-                                        return <Permission permissionList={permissionListAdd} enabled={false} handleOnChange={deletePermissionTemporaryList}/>
+                                        return <CardPermission permissionList={permissionListAdd} enabled={false} handleOnChange={deletePermissionTemporaryList}/>
                                     }
                                 })()}
                             </>
@@ -125,7 +124,7 @@ export const CreatePermissionGroup = () => {
                 </PanelBobyView>
 
                 <ModalView show={showModalAddPermission} handleClose={closeModalAddPermission} title={titleModal} handleOnChangeButton={addItemListBeforeSaving}>
-                    <SelectItem options={permissionList} value={0} handleOnChange={addItemTemporaryList}/>
+                    <SelectItemPermission options={permissionList} value={0} handleOnChange={addItemTemporaryList}/>
                 </ModalView>
             </>
         </Container>

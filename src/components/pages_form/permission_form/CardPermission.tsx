@@ -1,7 +1,6 @@
-import { Form } from "react-bootstrap";
 import { PermissionDTO } from "../../../types/PermissionResponse";
 
-export const Permission = ({permissionList, enabled, handleOnChange}: {permissionList: PermissionDTO[], enabled: boolean, handleOnChange:any}) => {
+export const CardPermission = ({permissionList, enabled, handleOnChange}: {permissionList: PermissionDTO[], enabled: boolean, handleOnChange:any}) => {
   return (
     <>
       <div className="row">

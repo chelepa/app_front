@@ -75,4 +75,8 @@ export const authApi = () => ({
     getAllCustomer: async (page: number, size: number, name: string, lastName: string, email: string) => {
         return await api.get('/v1/Customer', {params: { page: page, size: size, name: name, lastName: lastName, email: email}})
     },
+
+    getCustomerById: async (id: string) => {
+        return await api.get(`/v1/Customer/${id}`);
+    },
 });

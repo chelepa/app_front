@@ -1,7 +1,7 @@
 import { PermissionDTO } from '../../types/PermissionResponse';
-import styles from './SelectItem.module.css'
+import styles from './SelectItemPermission.module.css'
 
-export const SelectItem = ({options, handleOnChange, value}: {options: PermissionDTO[], handleOnChange:any, value: number}) => {
+export const SelectItemPermission = ({options, handleOnChange, value}: {options: PermissionDTO[], handleOnChange:any, value: number}) => {
     return (
         <div className={styles.form_control}>
           <select onChange={handleOnChange}>

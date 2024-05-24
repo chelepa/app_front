@@ -9,11 +9,26 @@ export type CustomerResponse = {
 }
 
 export type CustomerDTO = {
-    id: String;
-    name: String;
-    email: String;
-    last_name: String;
-    cell: String;
-    password: String;
+    id: number;
+    name: string;
+    email: string;
+    last_name: string;
+    cell: string;
+    password: string;
     group: GroupPermission[];
+}
+
+export type CustomerRequest = {
+    id: number;
+    name: string;
+    email: string;
+    last_name: string;
+    cell: string;
+    password: null | string;
+    group: number[];
+}
+
+export type PasswordRequest = {
+    password: string;
+    checkPassword: string;
 }

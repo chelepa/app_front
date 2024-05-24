@@ -6,9 +6,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PermissionGroupContext } from "../../../contexts/PermissionGroup/PermissionGroupContext";
 import { PanelViewPagination } from "../../layout/PanelViewPagination";
 import { PermissionGroupFormUpdate } from "../../pages_form/PermissionGroup_Form/PermissionGroupFormUpdate";
-import { Permission } from "../../pages_form/PermissionGroup_Form/Permission";
+import { CardPermission } from "../../pages_form/permission_form/CardPermission";
 import { ModalView } from "../../layout/ModalView";
-import { SelectItem } from "../../form/SelectItem";
+import { SelectItemPermission } from "../../form/SelectItemPermission";
 import { PermissionDTO, TPermissionList } from "../../../types/PermissionResponse";
 
 export const UpdatePermissionGroup = () => {
@@ -122,7 +122,7 @@ export const UpdatePermissionGroup = () => {
                                         handleDescriptionInput={handleDescriptionInput} 
                                         erros={erros}/>
                                 } else {
-                                    return <Permission
+                                    return <CardPermission
                                         permissionList={permissionActive} 
                                         enabled={showPermissionFrom} 
                                         handleOnChange={deletePermission}/>
@@ -133,7 +133,7 @@ export const UpdatePermissionGroup = () => {
                 </PanelBobyView>
 
                 <ModalView show={showModal} handleClose={handleConfigClose} title={"Adicionar Permissão"} handleOnChangeButton={AddItem}>
-                    <SelectItem options={permission} value={1} handleOnChange={handleOnChangeSelectItem}/>
+                    <SelectItemPermission options={permission} value={1} handleOnChange={handleOnChangeSelectItem}/>
                 </ModalView>
             </>
         </Container>
@@ -153,7 +153,7 @@ export const UpdatePermissionGroup = () => {
         });
     }
 
-    function getAllPermission() {       
+    function getAllPermission() {
         auth.getAllPermission(0, 200, "", "")
         .then((res) => {
             setPermission(res.permission);
