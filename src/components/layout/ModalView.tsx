@@ -12,7 +12,7 @@ export const ModalView = ({show, handleClose, handleOnChangeButton, title, child
           {children}
         </Modal.Body>
         <Modal.Footer>
-          <SubmitButton text="Save" handleOnChange={handleOnChangeButton} customClass={""} customClassButton=""/>
+          <SubmitButton text="Save" handleOnChange={handleOnChangeButton} customClass={""} customClassButton="" enable={false}/>
         </Modal.Footer>
       </Modal>
     </>

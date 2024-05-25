@@ -1,8 +1,8 @@
-import { CustomerDTO } from "../../../types/Customer";
+import { CustomerDTO, CustomerRequest } from "../../../types/Customer";
 import { Input } from "../../form/Input";
 
-export const CustomerFormUpdate = ({customer, actionName, actionLastName, actionEmail, actionCell, readOnly}: {
-    customer: CustomerDTO; actionName: any; actionLastName: any; actionEmail:any; actionCell: any; readOnly: boolean;}) => {
+export const CustomerFormUpdate = ({customer, actionName, actionLastName, actionEmail, actionCell, readOnly, erros}: {
+    customer: CustomerDTO; actionName: any; actionLastName: any; actionEmail:any; actionCell: any; readOnly: boolean; erros: Partial<CustomerRequest>}) => {
   return (
     <>
       <div className="col-2">
@@ -28,7 +28,7 @@ export const CustomerFormUpdate = ({customer, actionName, actionLastName, action
           value={customer.name}
           customClass=""
           readOnly={readOnly}
-          erros={null}
+          erros={erros.name}
         />
       </div>
       <div className="col-5">
@@ -41,7 +41,7 @@ export const CustomerFormUpdate = ({customer, actionName, actionLastName, action
           value={customer.last_name}
           customClass=""
           readOnly={readOnly}
-          erros={null}
+          erros={erros.last_name}
         />
       </div>
 
@@ -55,7 +55,7 @@ export const CustomerFormUpdate = ({customer, actionName, actionLastName, action
           value={customer.email}
           customClass=""
           readOnly={readOnly}
-          erros={null}
+          erros={erros.email}
         />
       </div>
 
@@ -69,7 +69,7 @@ export const CustomerFormUpdate = ({customer, actionName, actionLastName, action
           value={customer.cell}
           customClass=""
           readOnly={readOnly}
-          erros={null}
+          erros={erros.cell}
         />
       </div>
     </>

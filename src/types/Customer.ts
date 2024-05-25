@@ -19,7 +19,6 @@ export type CustomerDTO = {
 }
 
 export type CustomerRequest = {
-    id: number;
     name: string;
     email: string;
     last_name: string;

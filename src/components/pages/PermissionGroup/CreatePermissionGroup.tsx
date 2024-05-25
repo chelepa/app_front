@@ -98,7 +98,7 @@ export const CreatePermissionGroup = () => {
     return(
         <Container customClass="start" msg="" type="" showLoading={false}>
             <>
-                <PanelBobyView title="Modulo de Criação" redirect="/group" handleOnChangeDelete={null} handleOnChangeUpdateOrCreate={addPermissionGroup} saveOrDelete={false}>
+                <PanelBobyView title="Modulo de Criação" redirect="/group" handleOnChangeDelete={null} handleOnChangeUpdateOrCreate={addPermissionGroup} saveOrDelete={false} enableSave={false}>
                     <PanelViewPagination 
                             pagination={pagination} 
                             txtButton=""
@@ -110,11 +110,7 @@ export const CreatePermissionGroup = () => {
                             <>
                                 {(() => {
                                     if (navAction === "Grupo de Permissao") {
-                                        return <PermissionGroupFormCreate 
-                                            groupDTO={groupPermissionRequest} 
-                                            handleNameInput={addNameInput} 
-                                            handleDescriptionInput={AddDescriptionInput} 
-                                            erros={erros}/>
+                                        return <PermissionGroupFormCreate groupDTO={groupPermissionRequest} handleNameInput={addNameInput} handleDescriptionInput={AddDescriptionInput} erros={erros}/>
                                     } else {
                                         return <CardPermission permissionList={permissionListAdd} enabled={false} handleOnChange={deletePermissionTemporaryList}/>
                                     }

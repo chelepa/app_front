@@ -24,3 +24,8 @@
 .btn_save_update{
     width: fit-content;
 }
+
+button:disabled, button[disabled]{
+  background-color: #22222257;
+  color: #ffffff;
+}

@@ -1,7 +1,7 @@
 import { SubmitButton } from "../form/SubmitButton";
 import styles from "./PanelAction.module.css";
 
-export const PanelAction = ({saveOrDelete, handleOnChangeDelete, handleOnChangeUpdate}: {saveOrDelete: boolean, handleOnChangeDelete:any, handleOnChangeUpdate:any}) => {
+export const PanelAction = ({saveOrDelete, handleOnChangeDelete, handleOnChangeUpdate, enableSave}: {enableSave: boolean, saveOrDelete: boolean, handleOnChangeDelete:any, handleOnChangeUpdate:any}) => {
   return (
     <div className={`${styles.panel_header}`}>
       <div className={`card ${saveOrDelete ? "bg-danger bg-gradient" : "bg-info bg-gradient"} text-white`}>
@@ -16,6 +16,7 @@ export const PanelAction = ({saveOrDelete, handleOnChangeDelete, handleOnChangeU
                 handleOnChange={saveOrDelete ? handleOnChangeDelete : handleOnChangeUpdate}
                 customClass=""
                 customClassButton={saveOrDelete ? "color_delete" : "color_black"}
+                enable={!saveOrDelete && enableSave}
               />
             </div>
           </div>

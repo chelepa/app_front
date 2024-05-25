@@ -1,4 +1,5 @@
 import { authApi } from "../../api/AuthApi";
+import { CustomerRequest } from "../../types/Customer";
 import { CustomerContext } from "./CustomerContext";
 
 export const CustomerProvider = ({ children }: { children: JSX.Element }) => {
@@ -16,8 +17,16 @@ export const CustomerProvider = ({ children }: { children: JSX.Element }) => {
         return await api.getAllCustomer(page, size, name, lastName, email);
     }
 
+    const updateCustomerById = async (id: string, request: CustomerRequest) => {
+        return await api.updateCustomerById(id, request);
+    }
+
+    const deleteCustomerById = async (id: number) => {
+        return await api.deleteCustomerById(id);
+    }
+
     return (
-        <CustomerContext.Provider value={{getAllCustomer, getAllGroupPermission, getCustomerById}}>
+        <CustomerContext.Provider value={{getAllCustomer, getAllGroupPermission, getCustomerById, updateCustomerById, deleteCustomerById}}>
           {children}
         </CustomerContext.Provider>
     );

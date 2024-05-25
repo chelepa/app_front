@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { PermissionRequest } from '../types/PermissionRequest';
 import { GroupPermissionRequest } from '../types/Group';
+import { CustomerRequest } from '../types/Customer';
 
 const api_authentication = axios.create({
     baseURL: process.env.REACT_APP_API
@@ -78,5 +79,13 @@ export const authApi = () => ({
 
     getCustomerById: async (id: string) => {
         return await api.get(`/v1/Customer/${id}`);
+    },
+
+    updateCustomerById: async (id: string, request: CustomerRequest) => {
+        return await api.patch(`/v1/Customer/${id}`, request);
+    },
+
+    deleteCustomerById: async (id: number) => {
+        return await api.delete(`/v1/Customer/${id}`);
     },
 });

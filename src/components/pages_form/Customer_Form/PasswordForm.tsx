@@ -1,7 +1,7 @@
 import { PasswordRequest } from "../../../types/Customer";
 import { Input } from "../../form/Input";
 
-export const PasswordForm = ({updatePassword, actionPassword, actionCheckPassword, readOnly}:{updatePassword: PasswordRequest, actionPassword: any, actionCheckPassword: any, readOnly:boolean}) => {
+export const PasswordForm = ({updatePassword, actionPassword, actionCheckPassword, readOnly, erros}:{updatePassword: PasswordRequest, actionPassword: any, actionCheckPassword: any, readOnly:boolean, erros: Partial<PasswordRequest>}) => {
   return (
     <>
       <div className="col-6">
@@ -27,7 +27,7 @@ export const PasswordForm = ({updatePassword, actionPassword, actionCheckPasswor
           value={updatePassword.checkPassword}
           customClass=""
           readOnly={readOnly}
-          erros={null}
+          erros={erros.checkPassword}
         />
       </div>
     </>
