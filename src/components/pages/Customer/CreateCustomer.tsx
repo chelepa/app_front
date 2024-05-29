@@ -43,7 +43,6 @@ export const CreateCustomer = () => {
     const actionCheckPassword = (event: ChangeEvent<HTMLInputElement>) => functionSetCheckPassword(event.target.value, setPassword, setErros, setEnableSaveButton, customer, password);
     const createCustomer = () => functionCreateCustomer(groupPermissionListView, password, customer);
 
-
     useEffect(() => {
         getAllPermissionGroup(auth, setGroupPermissionListSelected, setAddGroupPermissionSelectedTemporaryList);
     }, []);
