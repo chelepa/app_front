@@ -4,6 +4,7 @@ export const CardGroupPermission = ({list, enabled, handleOnChange}: {list: Grou
     return (
       <>
         <div className="row">
+          {list.length === 0 && <div className="alert alert-danger" role="alert">É Nessesario Adicionar pelo Menos um Grupo de Permissão</div>}
           {list.map((item) => (
             <div className="col-sm-2">
               <div className="card text-center">

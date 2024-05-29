@@ -14,7 +14,7 @@ export const PasswordForm = ({updatePassword, actionPassword, actionCheckPasswor
           value={updatePassword.password}
           customClass=""
           readOnly={readOnly}
-          erros={null}
+          erros={erros.password}
         />
       </div>
       <div className="col-6">
